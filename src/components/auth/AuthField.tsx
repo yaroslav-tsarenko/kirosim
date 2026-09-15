@@ -29,7 +29,7 @@ export function Field({ label, name, errors, className, ...rest }: FieldProps) {
         id={name}
         name={name}
         aria-invalid={errors?.length ? true : undefined}
-        className={cn(authInputClass, errors?.length && "border-danger", className)}
+        className={cn(authInputClass, errors?.length ? "border-danger" : undefined, className)}
         {...rest}
       />
       <FieldError errors={errors} />
