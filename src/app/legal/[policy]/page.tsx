@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Route } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Section, Container, PageHeader } from "@/components/ui/Section";
@@ -10,6 +10,52 @@ import { site } from "@/lib/site";
 
 export function generateStaticParams() {
   return policies.map((p) => ({ policy: p.slug }));
+}
+
+/** Renders inline `**bold**` emphasis and `[label](url)` links inside policy
+ *  text. Same-site kirosim.com links become internal Next links; everything
+ *  else opens in a new tab. */
+function renderInline(text: string, keyPrefix: string): React.ReactNode[] {
+  const nodes: React.ReactNode[] = [];
+  const token = /\*\*(.+?)\*\*|\[([^\]]+)\]\(([^)]+)\)/g;
+  let last = 0;
+  let match: RegExpExecArray | null;
+  let i = 0;
+  while ((match = token.exec(text))) {
+    if (match.index > last) nodes.push(text.slice(last, match.index));
+    if (match[1] !== undefined) {
+      nodes.push(
+        <strong key={`${keyPrefix}-${i}`} className="font-medium text-ink">
+          {match[1]}
+        </strong>,
+      );
+    } else {
+      const label = match[2];
+      const url = match[3];
+      const internal = url.replace(/^https?:\/\/kirosim\.com/, "");
+      nodes.push(
+        internal.startsWith("/") ? (
+          <Link key={`${keyPrefix}-${i}`} href={internal as Route} className="text-signal hover:underline">
+            {label}
+          </Link>
+        ) : (
+          <a
+            key={`${keyPrefix}-${i}`}
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+            className="text-signal hover:underline"
+          >
+            {label}
+          </a>
+        ),
+      );
+    }
+    last = token.lastIndex;
+    i++;
+  }
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes;
 }
 
 export async function generateMetadata({ params }: PageProps<"/legal/[policy]">): Promise<Metadata> {
@@ -79,11 +125,58 @@ export default async function PolicyPage({ params }: PageProps<"/legal/[policy]"
                     {section.heading}
                   </h2>
                   <div className="mt-4 space-y-4">
-                    {section.clauses.map((clause, j) => (
-                      <p key={j} className="text-pretty leading-relaxed text-ink-muted">
-                        {clause}
-                      </p>
-                    ))}
+                    {section.blocks.map((block, j) => {
+                      if (typeof block === "string") {
+                        return (
+                          <p key={j} className="text-pretty leading-relaxed text-ink-muted">
+                            {renderInline(block, `${i}-${j}`)}
+                          </p>
+                        );
+                      }
+                      if ("list" in block) {
+                        return (
+                          <ul
+                            key={j}
+                            className="ml-5 list-disc space-y-1.5 text-ink-muted marker:text-ink-faint"
+                          >
+                            {block.list.map((item, k) => (
+                              <li key={k} className="leading-relaxed">
+                                {renderInline(item, `${i}-${j}-${k}`)}
+                              </li>
+                            ))}
+                          </ul>
+                        );
+                      }
+                      return (
+                        <div key={j} className="-mx-1 overflow-x-auto">
+                          <table className="w-full border-collapse text-sm text-ink-muted">
+                            <thead>
+                              <tr>
+                                {block.table.head.map((h, k) => (
+                                  <th
+                                    key={k}
+                                    className="border-b border-ink px-3 py-2 text-left font-medium text-ink"
+                                  >
+                                    {h}
+                                  </th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {block.table.rows.map((row, r) => (
+                                <tr key={r}>
+                                  {row.map((cell, c) => (
+                                    <td key={c} className="border-b border-hairline px-3 py-2 align-top">
+                                      {renderInline(cell, `${i}-${j}-${r}-${c}`)}
+                                    </td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      );
+                    })}
                   </div>
                 </section>
               ))}

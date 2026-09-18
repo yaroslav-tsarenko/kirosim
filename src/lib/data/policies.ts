@@ -1,11 +1,20 @@
 /** Customer-facing legal policies, transcribed from the master text in
- *  addons/Policies.docx. The internal pre-publication checklist that
- *  follows the policies in the source document is intentionally NOT included —
- *  it is marked "not part of the customer-facing terms". */
+ *  addons/kirosim-policies.md. Only the content between each
+ *  PUBLIC_POLICY_START / PUBLIC_POLICY_END marker is included — the YAML
+ *  front matter, document map and internal implementation appendix are marked
+ *  "not customer-facing content" and are intentionally omitted. */
+
+/** A block of policy content. A plain string is a paragraph (supporting inline
+ *  `**bold**` and `[label](url)` markup); objects render as a bullet list or a
+ *  table. */
+export type PolicyBlock =
+  | string
+  | { list: string[] }
+  | { table: { head: string[]; rows: string[][] } };
 
 export interface PolicySection {
   heading: string;
-  clauses: string[];
+  blocks: PolicyBlock[];
 }
 
 export interface Policy {
@@ -19,217 +28,165 @@ export interface Policy {
   sections: PolicySection[];
 }
 
+const LAST_UPDATED = "17 September 2026";
+
 export const policies: Policy[] = [
   {
     slug: "terms",
     title: "Terms & Conditions",
     shortTitle: "Terms",
-    lastUpdated: "31 August 2026",
+    lastUpdated: LAST_UPDATED,
     summary:
-      "The contract that governs purchases from and use of velusim.com and the travel eSIM services sold by COMPANY NAME LTD.",
+      "The contract governing purchases through kirosim.com and use of the travel eSIM services sold by BRIGHTCORE ENTERTAINMENT LTD.",
     sections: [
       {
-        heading: "About Velusim and these Terms",
-        clauses: [
-          "These Terms & Conditions govern purchases from and use of velusim.com (the Website) and the travel eSIM services sold by COMPANY NAME LTD (Velusim, we, us or our). COMPANY NAME LTD is a company registered under company number COMPANY NUMBER. Our registered office is COMPANY ADDRESS. Contact us at support@velusim.com.",
-          "COMPANY NAME LTD sells eSIMs in its own name and is your contractual seller. We use telecommunications infrastructure and technical contractors to deliver the service, but this does not transfer our obligations as seller to you or remove rights you have against us.",
-          "An eSIM is a digital SIM profile installed on a compatible device. A Plan is the prepaid package of mobile data, calls and SMS described in your order. Installation means successfully downloading the eSIM profile to your device. Activation means the start of the Plan's validity period, which occurs on successful installation. A Top-up is a separately purchased addition to an eligible existing Plan or eSIM.",
-          "These Terms should be read with our Refund & Cancellation Policy, Digital Delivery & Activation Policy and Acceptable Use & Fair Usage Policy. Our Privacy Policy and Cookie Policy explain personal data and website technologies; they are notices, not a blanket request for consent. Our Complaints Handling Policy explains how to raise concerns. Specific Plan features disclosed before purchase form part of your contract. Mandatory law prevails over any conflicting provision.",
+        heading: "About Kirosim and these Terms",
+        blocks: [
+          "Kirosim is operated by **BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, with its registered office at **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. In these Terms, “Kirosim”, “we”, “us” and “our” mean that company. Contact us at **info@kirosim.com**.",
+          "These Terms govern purchases through **kirosim.com** and use of our travel eSIM services. An “eSIM” is a digital SIM profile installed on a compatible device. A “Plan” is the package of mobile connectivity purchased for that profile, with the destinations, allowance, duration and features specified before payment. A “Top-up” is an additional package purchased for an eligible eSIM.",
+          "Our [Refund & Cancellation Policy](https://kirosim.com/legal/refund-cancellation), [Digital Delivery & Activation Policy](https://kirosim.com/legal/delivery-activation) and [Acceptable Use & Fair Usage Policy](https://kirosim.com/legal/acceptable-use) form part of your purchase agreement. Our [Privacy Policy](https://kirosim.com/legal/privacy) and [Cookie Policy](https://kirosim.com/legal/cookies) explain how information is handled; accepting these Terms is not consent to optional marketing or tracking.",
+          "Read the Plan description and applicable policies before paying. Mandatory consumer rights prevail over these Terms. Subject to those rights, specific Plan details disclosed and agreed before payment prevail over general descriptions where they address the same feature. This does not allow a Plan description to remove the refund protection expressly offered in our Refund & Cancellation Policy.",
         ],
       },
       {
-        heading: "Eligibility and account security",
-        clauses: [
-          "You must be at least 18 years old to purchase or use our services. You must have legal capacity to enter into the contract and be authorised to use the payment method you provide. Do not create an account or place an order using another person's identity without lawful authority.",
-          "Provide accurate contact, billing and account information and keep it up to date. Your email address is used for order communications and eSIM delivery. Check it carefully before payment. If you discover an error, contact us promptly so we can help after reasonably verifying the order.",
-          "Keep your login details and eSIM installation credentials secure. Notify us promptly if you suspect unauthorised access or use. Responsibility for an unauthorised transaction will be assessed under the applicable law and the circumstances; it does not automatically fall on you solely because your account was used.",
-          "Some destinations or Plans may require identity information or registration under local telecommunications rules. Any requirement relevant to a purchase should be disclosed before payment or, if newly imposed, promptly afterwards. We will explain what is needed and why. We will not assume that every customer must supply a passport. If an undisclosed requirement prevents provision of the purchased service, contact us for an appropriate remedy.",
+        heading: "Eligibility and geographic restrictions",
+        blocks: [
+          "You must be at least **18 years old** to create an account, purchase or use our services. You must provide accurate information and be authorised to use the payment method you select.",
+          "Kirosim does not accept purchases from customers located in or resident in the following countries, and our services must not be used in these countries:",
+          {
+            list: [
+              "Afghanistan",
+              "Belarus",
+              "Central African Republic",
+              "Cuba",
+              "Democratic Republic of the Congo",
+              "Haiti",
+              "Iran",
+              "Iraq",
+              "Mali",
+              "Myanmar (Burma)",
+              "North Korea",
+              "Russia",
+              "Somalia",
+              "South Sudan",
+              "Sudan",
+              "Syria",
+              "Venezuela",
+              "Yemen",
+              "Zimbabwe",
+            ],
+          },
+          "These are Kirosim service restrictions. The list does not mean that every listed country is subject to identical legal sanctions. Do not conceal your location, residence or transaction details to bypass these restrictions. We may request proportionate information to check eligibility or decline a transaction that cannot lawfully or legitimately be fulfilled.",
+          "Availability for purchase outside these countries does not mean that every destination is covered. Connectivity is available only in the destinations included in your particular Plan. Regional and global Plans remain subject to the restrictions above.",
+          "We may amend restrictions for future purchases. If a change makes an existing purchase unavailable, we will explain the effect and address any replacement or refund due under the Refund & Cancellation Policy and applicable law. A restriction does not automatically permit us to retain money for services we cannot supply.",
         ],
       },
       {
-        heading: "Restricted countries and sanctions compliance",
-        clauses: [
-          "Velusim does not make its services available in the following restricted countries: Sudan; Democratic Republic of the Congo; Iran; Mali; Myanmar (Burma); North Korea; South Sudan; Syria; Yemen; Afghanistan; Belarus; Central African Republic; Cuba; Haiti; Iraq; Russia; Somalia; Venezuela; and Zimbabwe. Do not place an order from, or seek to use a Plan in, a restricted country. Regional and global Plan descriptions do not override this restriction.",
-          "This is Velusim's service-restriction list for sanctions compliance and risk management. It is not a representation that a universal legal embargo applies to every listed country or every person of that nationality. Separately, we cannot enter into a transaction or provide a service where doing so would breach sanctions, export controls or other laws applicable to us, including restrictions concerning designated persons and entities they own or control.",
-          "Do not conceal your location, supply false billing details, use another person's identity or otherwise circumvent an applicable restriction. We may request proportionate information to resolve a genuine compliance concern and may decline, delay or suspend an affected transaction. We will explain our decision where legally permitted. Any return or restriction of funds will follow applicable law; a compliance review does not give us an unrestricted right to keep your money.",
+        heading: "Accounts and security",
+        blocks: [
+          "Where an account is required, keep its details accurate and its credentials secure. Notify us promptly if you suspect unauthorised access or an unauthorised purchase. You are responsible for activity you authorise, but these Terms do not make you automatically responsible for every unauthorised transaction.",
+          "Do not share access in a way that exposes another person's information or allows prohibited use. We may take reasonable steps to verify account or order ownership before providing access to eSIM credentials, changing an email address or discussing an order.",
+          "Closing an account does not itself cancel a Plan, stop its validity period or create a refund entitlement. Contact us before closure if you need access to an active Plan or assistance with an outstanding order. Records that must be retained are handled under our Privacy Policy.",
         ],
       },
       {
-        heading: "Plans, coverage and device requirements",
-        clauses: [
-          "Velusim offers prepaid internet Plans with calls and SMS, including eligible Top-ups and Unlimited options. The destination, data allowance, call allowance, SMS allowance, validity period and any feature-specific restrictions are those shown for the selected Plan before purchase. Do not assume that every package has identical allowances or that international, premium-rate or special-service numbers are included.",
-          "An Unlimited description applies only to the feature expressly described as unlimited. It does not automatically mean unlimited calls, SMS, hotspot use or uninterrupted maximum-speed data. Any high-speed allowance, speed reduction, daily reset or tethering restriction must be disclosed in the relevant Plan information before you pay. We will not rely on an undisclosed numerical fair-use limit to change what you purchased.",
-          "Your device must support the relevant eSIM, be unlocked for use with other networks and meet the Plan's technical requirements. Compatibility may depend on the exact model, regional version, software and network settings. Check these details before purchase; general compatibility guidance is not a guarantee for every variant. Contact us if you are unsure.",
-          "Coverage, available network technology, speed, call quality and SMS delivery depend on the destination, local network, signal, congestion, device and other operating conditions. A country appearing in a Plan does not guarantee service at every address, indoors, at sea or in the air. We remain responsible for the service description and for providing the remedies required if the service does not conform to the contract.",
-          "Calls and SMS work only to the extent included in the selected Plan and supported in the relevant location. Do not assume support for emergency calling, short codes, bank verification messages, number portability, a particular number format or retaining a number after expiry unless that feature is expressly confirmed. Before relying on emergency connectivity, check the Plan's emergency-calling information and maintain another reliable way to contact emergency services. This warning does not exclude any statutory emergency-access duty applicable to us.",
+        heading: "Device compatibility and service features",
+        blocks: [
+          "Before ordering, check that your device supports eSIM, is unlocked for use with other networks and is compatible with the selected Plan. Model variants, country of manufacture, operating system and device restrictions can affect compatibility. You will need an internet connection to download and install the profile.",
+          "The Plan description specifies the included data, validity, destinations and other features. Do not assume that a Plan includes a telephone number, conventional calls, SMS, hotspot use or a particular network generation unless stated. A data-only Plan does not provide conventional voice or SMS services.",
+          "An eSIM does not replace reliable access to emergency communications. Do not rely on a Kirosim Plan as your sole means of contacting emergency services.",
+          "Keeping your usual SIM active may result in charges from your existing mobile provider, including for calls, messages or data roaming. Kirosim's price covers the purchased Plan, not charges independently imposed on your other SIM or account.",
         ],
       },
       {
-        heading: "Orders, prices and payment",
-        clauses: [
-          "Review the selected destination, allowances, validity, compatibility, total price and currency before placing your order. Submitting an order is your offer to buy. We accept it when we send an order acceptance or make the purchased eSIM available in your dashboard, whichever occurs first. A payment-authorisation notice alone does not mean acceptance. If an order cannot be accepted after payment has been taken, we will return the amount paid, subject to any legal restriction.",
-          "We accept Visa and Mastercard. Purchases are available in EUR, GBP and USD. The final checkout amount and selected currency govern your purchase; prices displayed in different currencies need not be simple conversions of one another. Your card issuer may apply its own exchange rate or charges if your card currency differs. Such charges are not imposed by Velusim.",
-          "The total price, including any applicable taxes and unavoidable charges payable to us, will be shown before payment. COMPANY NAME LTD is not currently registered for UK VAT and does not issue UK VAT invoices. This statement is not a claim that every cross-border supply is exempt from all taxes. Any tax legally applicable to a transaction must be handled under the relevant rules and accurately reflected in the price information.",
-          "Plans and Top-ups are prepaid one-off purchases. There are no automatically renewing subscriptions or automatic Top-ups. A further purchase requires your instruction and payment authorisation. Expiry or exhaustion does not authorise us to charge for a new package automatically.",
-          "We may correct genuine pricing or description errors before accepting an order and give you the choice to proceed on the corrected basis or cancel. We will not impose a higher price after acceptance without your agreement. Promotional conditions, exclusions and expiry dates will be disclosed with the offer; promotions do not reduce mandatory consumer rights.",
+        heading: "Orders and contract formation",
+        blocks: [
+          "Check the destination, duration, allowance, currency, compatibility information and total price before submitting your order. You place an order by completing checkout with an obligation to pay. We accept it when we send a confirmation that expressly accepts the order or make the purchased eSIM available, whichever happens first. An automated payment receipt or order acknowledgement alone is not acceptance unless it says so.",
+          "We may decline an order before acceptance if it cannot be supplied, payment fails, the customer is ineligible or there are reasonable concerns about fraud or unlawful use. If payment has been collected for an order we decline, we will arrange a refund without undue delay, subject to any legal restriction on returning funds.",
+          "If a material pricing or description error is discovered, we will explain it and seek your agreement to any proposed correction, or cancel and refund an order that cannot lawfully be fulfilled on the agreed basis. We will not impose a higher price after payment without your agreement.",
+        ],
+      },
+      {
+        heading: "Prices and payment",
+        blocks: [
+          "We accept **Visa and Mastercard**. Purchases are available in **EUR, GBP and USD**. The checkout identifies the currency and total amount payable before you commit to payment. Any applicable mandatory charge must be included or clearly disclosed before the order is placed.",
+          "BRIGHTCORE ENTERTAINMENT LTD is not currently VAT-registered. This statement does not represent that every cross-border transaction is exempt from all applicable taxes. Any tax legally chargeable on your order will be handled as required by law and reflected in the amount disclosed before payment.",
+          "Your card issuer may apply currency conversion or other charges under its agreement with you. Those charges are separate from our displayed price. We do not control the issuer's exchange rate.",
+          "Payment must be successfully completed before fulfilment. A temporary card authorisation is not necessarily a completed charge. Contact us if you believe you have been charged twice or charged an incorrect amount.",
+          "Plans are prepaid, one-off purchases. They do not automatically renew. A Top-up requires a separate purchase and is available only where offered for the relevant eSIM. We will not charge you for additional allowances without your authorisation.",
         ],
       },
       {
         heading: "Delivery, installation and validity",
-        clauses: [
-          "After a successful order, the QR code and installation instructions are made available in your account dashboard and sent to your order email address. Delivery is electronic; no physical SIM is shipped. The delivery process and steps for missing or delayed credentials are explained in the Digital Delivery & Activation Policy. A failure to deliver a usable eSIM is not cured merely by recording that an email was sent.",
-          "Your Plan's validity period starts immediately after successful installation of the eSIM, not when you arrive at your destination or first use data, calls or SMS. Installing before travel can therefore use up part or all of the validity period before arrival. Read the instructions before installing. The stated duration runs continuously and is not paused by switching off the device, turning off the eSIM or leaving the coverage area.",
-          "There is no fixed deadline for installing an uninstalled eSIM after purchase, and Velusim does not impose a separate pre-installation expiry period. This does not extend the 14-day change-of-mind refund period. If a later technical or regulatory change makes an uninstalled purchased eSIM unusable, contact us: we will offer a suitable replacement with your agreement or an appropriate refund where lawful, rather than treat the purchase as forfeited simply because it was not installed sooner.",
-          "A Plan ends when its validity expires. An individual allowance may be exhausted earlier, in which case the affected feature may stop until an eligible Top-up is purchased; the remaining included features continue where supported and within the Plan's validity. Unused allowances do not roll over unless this is expressly included in the Plan. Removing the profile does not pause validity or restore used allowances.",
-          "Top-ups are available for eligible eSIMs. Before you buy, the offer must explain what is added, when it starts, how long it lasts and whether it changes the existing expiry date. A Top-up does not automatically renew or extend every component of a Plan. If an existing profile has been deleted, contact us before buying more allowances for it.",
-          "Treat your QR code and manual installation credentials as confidential. Reinstallation, transfer to another device or replacement after deletion may be technically restricted. Do not delete a working profile or share its QR code without checking the instructions or contacting support. We will assess any replacement request on its facts and preserve any applicable consumer remedy.",
-          "Your normal mobile subscription remains separate. Calls, data or messages routed through your home SIM can attract your home operator's charges. Select the correct SIM for data, calls and SMS and review automatic data switching and roaming settings. A Velusim Plan does not cancel charges under another subscription.",
+        blocks: [
+          "eSIMs are delivered electronically, with no physical SIM or postal shipment. Following successful payment and order processing, installation credentials and instructions are made available through the order or account interface and sent to the email address used for the purchase.",
+          "**The Plan's validity period begins when the eSIM is successfully installed. It does not wait for your arrival at the destination, first network connection or first data use.** Viewing a QR code or receiving an email is not installation.",
+          "Install only when you are ready for the validity period to begin. Once started, the period runs continuously and does not pause if you switch off your device, disable or delete the profile, leave the covered area or do not use the allowance.",
+          "Any deadline for installing a purchased eSIM must be disclosed before payment and in the order information. We will not retrospectively impose an undisclosed installation deadline on an existing purchase. Contact us before buying substantially in advance if the available installation window is unclear.",
+          "The [Digital Delivery & Activation Policy](https://kirosim.com/legal/delivery-activation) explains delivery problems, profile security, installation and Top-ups in more detail.",
         ],
       },
       {
-        heading: "Cancellation, faults and support",
-        clauses: [
-          "Contact support@velusim.com to request a cancellation or refund. Our Refund & Cancellation Policy provides a 14-day request period for change-of-mind cancellations, measured from the day after the purchase contract is concluded. An uninstalled and unused eSIM is eligible for a full refund under that policy. Installed Plans and technical faults are assessed as described there, with mandatory rights preserved.",
-          "Where applicable consumer law requires an express request to begin a service during a cancellation period, we must obtain that request before beginning early performance. Installation or supply of a QR code does not by itself waive all cancellation rights. Any lawful payment for service already supplied must be proportionate, and the loss of a statutory cancellation right on full performance requires the conditions imposed by applicable law to be satisfied.",
-          "Report delivery, installation or connectivity problems promptly so we can investigate while useful diagnostic information is available. We may request relevant device settings, an error message, the eSIM identifier and approximate location, but not your account password, full card details or card security code. Troubleshooting must be reasonable and must not be used to obstruct a cancellation or remedy.",
-          "We will provide the remedies required by applicable law when a service is faulty, misdescribed or not supplied as agreed. Depending on the circumstances, this may include correction, repeat performance, an agreed replacement, a price reduction or a refund. A general network disclaimer does not remove those rights.",
+        heading: "Coverage, performance and Plan limits",
+        blocks: [
+          "Mobile connectivity depends on local network availability, device capabilities, buildings, terrain, network load, maintenance and other technical conditions. Coverage maps and network-generation indicators do not guarantee a particular speed or an uninterrupted signal at every location.",
+          "These technical limitations do not excuse failure to supply the service as described or remove remedies required by law. Tell us promptly about a problem so that we can investigate while the relevant conditions can still be checked.",
+          "A fixed-data Plan ends when its allowance is exhausted or its validity expires, whichever occurs first, unless its description expressly provides otherwise. Unused allowance is not carried forward unless the Plan explicitly includes that feature.",
+          "Where an unlimited Plan is offered, any fair-use threshold, speed reduction, hotspot limit or other material restriction must be stated before purchase. We do not reserve a general right to introduce undisclosed limits into an existing Plan.",
+        ],
+      },
+      {
+        heading: "Cancellation, refunds and service problems",
+        blocks: [
+          "Our [Refund & Cancellation Policy](https://kirosim.com/legal/refund-cancellation) provides a 14-calendar-day change-of-mind refund for an eSIM that remains uninstalled and unused, and explains separate remedies for faulty, unavailable or undelivered services.",
+          "Installation ends eligibility for that voluntary uninstalled-eSIM offer. It does not automatically extinguish statutory cancellation rights or rights relating to a defective service. Any legally required request to start a service early or acknowledgement concerning cancellation must be obtained separately and validly.",
         ],
       },
       {
         heading: "Acceptable use and suspension",
-        clauses: [
-          "Use the service lawfully and in accordance with the Acceptable Use & Fair Usage Policy. You must not use it for fraud, unsolicited bulk communications, network interference, unauthorised access, unlawful surveillance or circumvention of applicable service restrictions. Any action we take must be proportionate to the conduct and the risk.",
-          "We may suspend an account or affected service where reasonably necessary to address a material breach, suspected fraud, a security incident, a legal obligation or a serious network-integrity risk. Where practicable, we will explain the issue and provide a reasonable opportunity to resolve it. Immediate action may be necessary for urgent risks or where disclosure is prohibited. We will review disputed decisions on request.",
-          "Suspension does not automatically forfeit all prepaid amounts. Refunds and any lawful deductions will depend on the reason, service already provided and applicable law. If we permanently discontinue a purchased service for reasons not attributable to you, we will provide an appropriate remedy for the unprovided service, subject to legal restrictions on payments.",
+        blocks: [
+          "Use the service lawfully and in accordance with our [Acceptable Use & Fair Usage Policy](https://kirosim.com/legal/acceptable-use). We may restrict or suspend the affected service where reasonably necessary to address a security threat, serious misuse, non-payment, a legal requirement or a material breach of the agreement.",
+          "Where practicable, we will explain the reason and provide an opportunity to resolve a remediable issue. We may act immediately where advance notice would create a security risk, facilitate unlawful activity or be prohibited by law. Any action should be proportionate to the issue.",
+          "You may challenge a restriction by contacting us. Suspension does not automatically forfeit your payment. Any refund, deduction or other financial consequence must be supported by the agreement and applicable law.",
         ],
       },
       {
-        heading: "Intellectual property and responsibility",
-        clauses: [
-          "The Website, branding, text and software are owned by or licensed to Velusim. You may use them to browse, buy and manage your service and retain copies of your contract. No ownership of our intellectual property is transferred. Do not reproduce the Website commercially, impersonate Velusim or misuse access credentials. This does not restrict rights that cannot lawfully be restricted.",
-          "Nothing in these policies excludes or limits liability for death or personal injury caused by negligence, fraud, fraudulent misrepresentation, or any other liability or consumer right that cannot lawfully be excluded or limited. We remain responsible for losses for which we are liable under applicable law, including foreseeable loss caused by our breach or failure to use reasonable care and skill.",
-          "Subject to the preceding clause, we are not responsible for losses that were not reasonably foreseeable, losses caused solely by your unlawful misuse or failure to follow reasonable instructions, or independent charges under another mobile contract that are not attributable to our breach. Plans are offered for personal travel use, not as a business continuity or safety-critical service; we do not accept liability for business losses to the extent lawfully excludable. You should take reasonable steps to limit avoidable loss.",
-          "Events outside our reasonable control may delay or interrupt service. We will take reasonable steps to reduce their impact and inform you where appropriate. Such events do not automatically remove a right to cancel or obtain a remedy for service that cannot be supplied. We will not require you to indemnify us for our own breach, negligence or failure to comply with law.",
+        heading: "Intellectual property",
+        blocks: [
+          "Our website, branding, text and other materials are owned by us or used with permission. You may use the website and supplied instructions for legitimate personal purposes connected with the service. You must not copy or commercially exploit our branding, reproduce substantial website content or falsely imply an association with Kirosim without permission, except where the law permits.",
+          "You retain rights in material you send us. You allow us to use that material only as reasonably needed to handle the relevant request, deliver the service and meet legal obligations.",
         ],
       },
       {
-        heading: "Changes, disputes and contact",
-        clauses: [
-          "Changes to these policies will be identified by an updated date. The version agreed when an order is accepted governs that order. We will not use a later revision to retroactively reduce purchased allowances or mandatory rights. If a material change to an existing service is necessary, we will give any notice, explanation and cancellation rights required by law.",
-          "These Terms are governed by the laws of England and Wales, without depriving a consumer of mandatory protections available under the law of their habitual residence where applicable. Courts of England and Wales have jurisdiction, but this does not prevent a consumer from using another court available to them under mandatory law. Nothing requires you to waive a lawful complaint, chargeback, regulatory report or access to justice.",
-          "If a provision is unenforceable, the remaining provisions continue to apply so far as legally possible. A delay in enforcing a right does not waive it. We may transfer the contract only without reducing your rights and with any notice or consent required by law. Contact COMPANY NAME LTD at support@velusim.com or our registered office above. Our Complaints Handling Policy explains the review process.",
-        ],
-      },
-    ],
-  },
-  {
-    slug: "refund-cancellation",
-    title: "Refund & Cancellation Policy",
-    shortTitle: "Refund Policy",
-    lastUpdated: "31 August 2026",
-    summary:
-      "How change-of-mind cancellations work, the 14-day request period, and remedies for faulty or undelivered eSIMs.",
-    sections: [
-      {
-        heading: "Scope and contact",
-        clauses: [
-          "This policy applies to eSIMs and Top-ups purchased directly from COMPANY NAME LTD through velusim.com. COMPANY NAME LTD, company number COMPANY NUMBER, is the seller. Our registered office is COMPANY ADDRESS. Send refund and cancellation requests to support@velusim.com.",
-          "This policy distinguishes change-of-mind cancellations from remedies for faulty, misdescribed or undelivered services. It does not exclude mandatory consumer rights. The 14-day period below is not a universal deadline for reporting faults, unauthorised payments or other legal claims.",
+        heading: "Our responsibility to you",
+        blocks: [
+          "We are responsible for supplying what we have agreed to provide and for exercising reasonable care and skill. If we breach the agreement, we are responsible for foreseeable loss caused by that breach, subject to applicable law. Loss is foreseeable if it was an obvious consequence or was contemplated by both parties when the contract was made.",
+          "The service is offered for personal travel use. To the extent permitted by law, we are not responsible for business losses such as lost profits, business opportunities or business interruption arising from use outside that purpose.",
+          "We are not responsible for a problem to the extent it is caused by your failure to follow clear and accurate instructions, incompatible equipment contrary to accurate compatibility information, or unauthorised changes you make. This does not exclude responsibility for our own errors, misleading information or failure to provide an appropriate remedy.",
+          "Nothing in these Terms excludes or limits liability for fraud, fraudulent misrepresentation, death or personal injury caused by negligence, or any liability or consumer right that cannot lawfully be excluded or limited.",
+          "If an event outside our reasonable control disrupts fulfilment, we will take reasonable steps to reduce its effect and explain the options available. Such an event does not automatically remove your right to end the affected contract or receive a refund where the law provides one.",
         ],
       },
       {
-        heading: "The 14-day cancellation period",
-        clauses: [
-          "You may request a change-of-mind cancellation within 14 calendar days, counted from the day after the purchase contract is concluded. Email us before the period ends. The date you send a clear cancellation request determines whether it was made in time, not the date support responds or finishes investigating.",
-          "If the eSIM has not been installed and none of the purchased service has been used, we will provide a full refund under this policy. This includes changing your travel plans, purchasing the wrong destination or discovering an incompatible device before installation. Merely receiving the QR code in the dashboard or by email does not disqualify an otherwise eligible request.",
-          "There is no fixed deadline for installing an eSIM, but this does not extend the 14-day change-of-mind period. Outside that period, a change-of-mind refund is not automatically available. You can still contact us, and any rights concerning non-delivery, faults, misdescription or other mandatory remedies remain unaffected.",
+        heading: "Changes and ending services",
+        blocks: [
+          "The version accepted at purchase governs that order. We may update terms for future purchases. A change to an existing agreement must have a valid legal or contractual basis; we will give appropriate notice and any cancellation or refund option required by law where it materially disadvantages you.",
+          "If we discontinue a purchased service before it has been provided as agreed, we will offer an appropriate remedy. You do not have to accept a materially different replacement instead of a refund to which you are entitled.",
         ],
       },
       {
-        heading: "Installed Plans and early performance",
-        clauses: [
-          "The Plan validity period begins on successful installation and runs continuously. If you request cancellation after installation, contact us within the 14-day period wherever possible. Installation is not treated as an automatic waiver of every refund or cancellation right.",
-          "Where a statutory service-cancellation right applies and you expressly requested early performance after receiving the required information, a lawful deduction may reflect service supplied up to the cancellation request. The amount must be proportionate to the contract and explained; it is not an arbitrary activation or administration fee. Depending on the Plan and applicable law, service supplied may include the period of availability as well as allowances used.",
-          "Where the law permits a cancellation right to end after full performance, that occurs only when all required conditions have been met, including any express request and acknowledgement. If the required early-performance request or information was not obtained, we will not charge for early supply where the law prohibits it. Where no statutory right applies, a refund for an installed or used Plan is assessed on the facts rather than guaranteed solely because the request is within 14 days.",
-          "After requesting cancellation, stop using the affected Plan if reasonably possible and follow our instructions for deactivation. We may disable a cancelled or refunded profile. We will not require you to delete diagnostic evidence or disable essential communications before arranging a reasonable way to investigate the issue.",
+        heading: "Governing law and disputes",
+        blocks: [
+          "These Terms are governed by the laws of England and Wales. If you are a consumer, this choice does not deprive you of mandatory protections available under the law of your habitual residence where those protections apply.",
+          "The courts of England and Wales may hear disputes, without preventing a consumer from bringing proceedings in another court available under mandatory law, including the courts of their home jurisdiction where applicable.",
+          "Please contact **info@kirosim.com** if a problem arises. Our [Complaints Handling Policy](https://kirosim.com/legal/complaints) explains the process. You do not have to complete that process before exercising a legal right or meeting an external claim deadline.",
         ],
       },
       {
-        heading: "Technical problems and incorrect orders",
-        clauses: [
-          "Contact us promptly if your QR code is missing or invalid, installation fails, a purchased feature does not work, the wrong Plan is supplied or service materially differs from its description. Provide the order reference, affected destination, device model, installation status and a short account of the problem. We will request only additional information reasonably needed to investigate.",
-          "We may first help correct settings or a provisioning problem, or offer an appropriate replacement with your agreement. If the service cannot be brought into conformity within the time and on the conditions required by law, we will provide the applicable price reduction, cancellation or refund. A partial refund must reasonably reflect the affected or unprovided part; a full refund may be due where the whole service has failed or the law requires it.",
-          "An incompatible or locked device, accidental profile deletion, lack of local coverage or incorrect settings does not produce the same outcome in every case. We will consider the information given before purchase, whether our compatibility or coverage statement was inaccurate, what was actually supplied and your legal rights. We will not reject a genuine fault claim solely because the eSIM was installed or some allowances were consumed.",
-          "Report connection problems while you are in the affected destination when reasonably possible. This can help us diagnose them, but contacting us after travel does not automatically extinguish a statutory claim. Screenshots or other evidence may be requested proportionately; support contact is not a requirement to surrender legal rights.",
-          "For duplicate, incorrect or suspected unauthorised charges, email us promptly with the transaction date, amount, currency and order reference if known. Do not send a full card number or security code. We will investigate and correct charges for which we are responsible. You may also contact your card issuer; we do not require you to withdraw a genuine payment dispute before considering your complaint.",
-        ],
-      },
-      {
-        heading: "Top-ups and refund payments",
-        clauses: [
-          "A Top-up is a separate purchase with its own 14-day request period. We will consider whether it has already started or been consumed and whether it can be separated from the underlying Plan. The same statutory early-performance and fault rules apply. A Top-up does not restart the original Plan's cancellation period.",
-          "Refunds are made to the original payment method in the currency of the original transaction, unless another lawful method is expressly agreed or the original method cannot receive the refund. We do not substitute store credit without your agreement. A refund cannot exceed the amount actually paid for the affected purchase, except where a separate legal entitlement applies.",
-          "For a valid statutory cancellation, we will issue the refund without undue delay and within the deadline required by law, generally no later than 14 days after being informed of the cancellation. For other approved refunds, we will issue payment without undue delay and aim to do so within 14 calendar days of approval, unless a shorter legal deadline applies. Your card issuer's posting time is separate; we cannot guarantee the date it will appear on your statement.",
-          "We do not impose a cancellation-processing fee under this policy. Any lawful deduction for service already supplied will be identified and explained. Your card issuer may apply exchange-rate differences or independent fees; this does not limit any amount we must reimburse under law. We will not pay the same loss twice where a refund or chargeback has already resolved it.",
-          "If a sanctions rule or other legal restriction prevents a payment, we must follow it and will explain the position where permitted. An unsupported suspicion does not create a right to confiscate a refund. If you disagree with a decision, request a review under our Complaints Handling Policy.",
-        ],
-      },
-      {
-        heading: "How to send your request",
-        clauses: [
-          "Email support@velusim.com with your name, order email, order number if available, the Plan concerned and a clear statement that you wish to cancel or request a refund. A reason helps with a fault investigation but is not required to exercise an applicable change-of-mind cancellation right. No particular subject line or form is compulsory. If email is unavailable, you may send a clear cancellation notice to our registered office; mandatory rights to notify us by other effective means are preserved.",
-          "You may use the following optional cancellation wording: \"To COMPANY NAME LTD, COMPANY ADDRESS; support@velusim.com. I/We hereby give notice that I/We cancel my/our contract for the supply of the following service: [identify service]. Ordered on: [date]. Order reference: [if available]. Name of consumer(s): [name]. Address of consumer(s): [address]. Date: [date]. Signature of consumer(s): [only if sent on paper].\" Delete whichever wording does not apply.",
-        ],
-      },
-    ],
-  },
-  {
-    slug: "delivery-activation",
-    title: "Digital Delivery & Activation Policy",
-    shortTitle: "Delivery & Activation",
-    lastUpdated: "31 August 2026",
-    summary:
-      "How your eSIM is delivered electronically, what to do if credentials are missing, and when your Plan's validity begins.",
-    sections: [
-      {
-        heading: "Electronic fulfilment",
-        clauses: [
-          "COMPANY NAME LTD, company number COMPANY NUMBER, supplies the eSIMs sold at velusim.com electronically. Our registered office is COMPANY ADDRESS. Delivery and installation support is available at support@velusim.com. No physical SIM, parcel or postal delivery is included.",
-          "Following a successful order, your QR code and installation instructions are made available in your account dashboard and sent to the email address used for the order. We also provide order information identifying the purchased Plan. Keep your confirmation and the policy version supplied with your purchase for future reference.",
-          "Fulfilment is intended to occur promptly after successful payment and order processing. Payment verification, security checks, technical provisioning or email delivery problems may cause a delay. We will not represent an unfulfilled order as successfully delivered merely because payment was authorised. Any specific delivery time shown before purchase forms part of the order information.",
-        ],
-      },
-      {
-        heading: "Missing credentials and delivery problems",
-        clauses: [
-          "Check your dashboard, inbox and spam or junk folder if the email does not arrive. Verify the address used for the order. If the eSIM is absent, inaccessible or unusable, email support with your order reference and a description of the problem. Avoid purchasing a duplicate solely to resolve a delivery delay unless you have first checked the order status.",
-          "If you entered an incorrect email address, contact us promptly. We may ask for proportionate evidence that you own the order before correcting the address or resending credentials. We will not disclose QR codes to an unverified requester. If credentials were exposed, tell us so that we can assess whether they can be secured or replaced.",
-          "Access to a working QR code in your dashboard can allow installation even if the email is delayed. However, inaccessible or invalid installation credentials are a delivery issue. Where we cannot supply the purchased service as agreed, the Refund & Cancellation Policy and applicable legal remedies apply.",
-        ],
-      },
-      {
-        heading: "Installation and the start of your Plan",
-        clauses: [
-          "Before installing, confirm that your device is eSIM-compatible, network-unlocked and able to maintain an internet connection during setup. Follow the instructions provided with your specific order. Your device's regional version or software may affect compatibility. Contact us before installation if you are uncertain.",
-          "Successful installation starts the Plan's validity period immediately. It does not wait for arrival at your destination, connection to a foreign network or your first call, SMS or data session. Install only when you are ready for the stated validity period to begin. Downloading an instruction email or viewing a QR code is not itself successful installation.",
-          "There is no fixed deadline to install an uninstalled eSIM after purchase. The purchased validity period does not start while the profile remains uninstalled. This absence of an installation deadline is separate from the 14-day change-of-mind refund period and does not promise that every underlying network arrangement will exist forever. If a later change prevents installation of an uninstalled purchase, we will offer an appropriate agreed replacement or refund where lawful.",
-          "After installation, validity runs continuously. Switching off the phone, disabling the profile, leaving the destination, not consuming allowances or deleting the eSIM does not stop the clock. Check the expiry information in your order and account. If the timing shown is inconsistent with the purchased duration, contact us for correction.",
-          "An installed Plan may require you to enable the profile, select it for mobile data, calls or SMS, enable the settings specified in the instructions and connect to a supported network. These settings enable use; they do not postpone the start of validity. Do not change unrelated security settings or install software from an unverified source to troubleshoot an eSIM.",
-        ],
-      },
-      {
-        heading: "QR-code security, deletion and Top-ups",
-        clauses: [
-          "Your QR code, activation details and manual installation credentials allow access to the purchased eSIM. Keep them private. They are not intended to be publicly shared or installed on multiple devices. The number of permitted installations and any transfer option depend on the profile's technical capabilities, not on how many copies of the QR image you retain.",
-          "Do not delete an eSIM as a troubleshooting step unless the instructions or support team direct you to do so. A deleted profile may not be reinstallable, and a QR code may cease to work after its permitted installation. Before replacing a device, resetting it or attempting a transfer, contact support. Replacement availability and any proposed charge must be explained before you agree, without limiting mandatory remedies.",
-          "Top-ups apply only to eligible profiles and have the start, validity and allowance conditions shown before their purchase. They may not repair a deleted or incompatible profile. No Top-up is purchased or charged automatically. Confirm that you are adding allowances to the intended eSIM before payment.",
-        ],
-      },
-      {
-        heading: "Availability and assistance",
-        clauses: [
-          "Service depends on the Plan's permitted destinations and features. Calls and SMS allowances, supported number types, hotspot availability and any fair-use conditions must be checked for the selected Plan. An installed eSIM does not guarantee a signal or emergency-call capability everywhere. Follow the emergency and compatibility information in the Terms & Conditions and the Plan description.",
-          "When requesting help, provide the order reference, device model, relevant error message, installation status and destination. Share only diagnostic information needed for the issue and obscure unrelated personal data in screenshots. Never send account passwords, full card details or security codes. Cancellation and refund rights are governed by the Refund & Cancellation Policy, not by the mere fact that an email or QR code was delivered.",
+        heading: "General provisions",
+        blocks: [
+          "If a provision is unenforceable, the remaining provisions continue to apply so far as they can operate fairly and lawfully. A delay in enforcing a right is not a waiver of it. Any permitted transfer of our rights or obligations must not reduce your contractual or statutory protection.",
+          "These Terms and the information incorporated into your purchase form the agreement concerning that purchase. Nothing in this clause excludes liability for misrepresentation or removes binding pre-contract information or promises protected by law.",
         ],
       },
     ],
@@ -238,72 +195,174 @@ export const policies: Policy[] = [
     slug: "privacy",
     title: "Privacy Policy",
     shortTitle: "Privacy",
-    lastUpdated: "31 August 2026",
+    lastUpdated: LAST_UPDATED,
     summary:
-      "What personal information COMPANY NAME LTD processes, why, the legal bases, sharing, retention, and your rights.",
+      "What personal information BRIGHTCORE ENTERTAINMENT LTD processes, why, the legal bases, sharing, retention and your rights.",
     sections: [
       {
         heading: "Who is responsible for your information",
-        clauses: [
-          "COMPANY NAME LTD is the controller of personal information used to operate velusim.com, manage customer accounts, sell eSIMs and handle related customer communications. Our company number is COMPANY NUMBER and our registered office is COMPANY ADDRESS. For privacy matters or to exercise a right, email support@velusim.com and identify your request as a privacy matter.",
-          "This policy explains the processing associated with our Website and services. It does not mean that every category of information described below is collected from every visitor. The information needed depends on whether you browse, create an account, purchase a Plan, use a particular feature or contact support. A specific collection notice will supplement this policy where an additional process requires further information.",
+        blocks: [
+          "**BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim**, is responsible as controller for the personal information it processes in operating **kirosim.com**, administering customer relationships and handling purchases and enquiries.",
+          "Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. For privacy questions or requests, contact **info@kirosim.com** and indicate that your message concerns privacy.",
+          "Connectivity and payment organisations may also process information for their own legal and operational purposes. Their role depends on the activity: not every organisation involved acts solely on our instructions.",
         ],
       },
       {
-        heading: "Information used in providing the service",
-        clauses: [
-          "Account and contact information includes the name, email address, account credentials or authentication information and other details you provide when registering or communicating with us. Order and billing information includes the purchased Plan, destination, currency, price, transaction reference, payment status and any billing information required at checkout. Do not send full card details or card security codes by email.",
-          "Payment information is used to authorise and reconcile purchases, refunds and disputed transactions. The exact payment information entered and any limited card information made available to us depend on the checkout process. This policy does not represent that Velusim receives or stores every item entered into a payment form, nor that payment processing occurs without any external recipient.",
-          "Service and technical information may include the eSIM or subscription identifier, assigned number where relevant, profile status, installation and expiry information, purchased and remaining allowances, device model, operating system, network information, IP address, timestamps and connection or error records. We use the information made available to us where needed to provision, administer, secure and troubleshoot the purchased service.",
-          "Providing data, voice and SMS services involves the processing of telecommunications information by the networks carrying the service. Depending on the feature and applicable law, this can include calling or called numbers, message-routing details, session times, duration, data volumes and network-derived location. Velusim's access to such information depends on what is supplied for service administration, billing, support or compliance. This is not a statement that we routinely read message content, record calls or receive your browsing history.",
-          "Support information includes your correspondence, complaint details and any screenshots or diagnostic evidence you choose to provide or that we reasonably request. Remove unrelated contacts, messages, payment information and precise location from screenshots where they are not needed. We will request identity evidence only where proportionate to verification, fraud prevention or an applicable legal requirement and explain the request.",
-          "Website usage and preference information can include pages visited, interaction events, browser and device details, referral information and cookie choices. Optional analytics or marketing processing is subject to the technologies actually enabled and the relevant consent rules. See the Cookie Policy. Subscription to promotional emails is separate from the information required to fulfil an order.",
+        heading: "Information covered by this Policy",
+        blocks: [
+          "The information relevant to your interaction may include:",
+          {
+            list: [
+              "**Contact and account information:** your email address, name and other details you provide, account identifiers, authentication records and preferences.",
+              "**Order and payment records:** Plan and destination selected, order reference, amount, currency, transaction status, refunds and information needed for billing or transaction verification. Information available to us depends on the payment flow; it may include limited payment-method details and a transaction reference.",
+              "**eSIM and service records:** profile identifiers, delivery and installation status, validity, remaining allowance, usage totals and technical status information made available to us for fulfilment and support.",
+              "**Website and device information:** IP address, browser and operating-system information, access times, requested pages, errors and security logs generated when interacting with the website.",
+              "**Support information:** messages, complaint details and relevant diagnostic information or screenshots you choose to provide.",
+              "**Preference and consent records:** cookie choices, marketing choices and records of notices or consents associated with an order.",
+            ],
+          },
+          "This description does not mean that Kirosim receives every category for every user. A network's ability to process connection or location information does not mean that we receive a complete record of your browsing, communications or precise movements.",
+          "Do not send full card numbers, card security codes, account passwords or unrelated sensitive information to our support email. If additional verification is necessary, we will explain what information is needed and how to provide it appropriately.",
         ],
       },
       {
-        heading: "Sources, purposes and legal bases",
-        clauses: [
-          "We obtain information directly from you, from your use of the Website and account, and from the payment, network and technical organisations involved in delivering the purchase. Where a legal or fraud-prevention check is needed, relevant information may also come from identity or sanctions-checking sources and public official records. We limit checks to a justified purpose and provide further information where required.",
-          "We use information where necessary to enter into or perform our contract with you: creating and managing your account, processing the order, delivering the eSIM, administering allowances, providing requested Top-ups, answering service enquiries and handling contractual cancellations or refunds. If essential information is not supplied, we may be unable to complete the purchase or provide the affected feature; we will explain which information is required.",
-          "We process information where necessary to comply with legal obligations, including applicable accounting and tax requirements, binding sanctions restrictions, telecommunications requirements and valid demands from competent authorities. We do not rely on a vague legal obligation to justify collecting unrelated information.",
-          "We may rely on legitimate interests for proportionate fraud prevention, account and network security, prevention of misuse, service reliability, handling disputes and establishing or defending legal claims. We consider the need for the processing and its impact on individuals and do not rely on this basis where your interests or rights override ours. The relevant interest is the protection and responsible operation of our business and services, not unrestricted commercial use of your data.",
-          "Where consent is required for optional technologies or electronic marketing, we will seek it separately and allow you to withdraw it. Where the law permits marketing about our own similar services without a new consent, we will use that route only when all conditions, including an appropriate opt-out, are met. Accepting the Terms or purchasing an eSIM is not blanket consent to advertising or disclosure for unrelated marketing.",
+        heading: "Where information comes from",
+        blocks: [
+          "We receive information directly from you when you browse, register, purchase, subscribe to communications or contact us. Technical information may be generated by your interaction with the website. We also receive relevant payment-status and service-status information from organisations involved in processing the transaction or supplying connectivity, and information from a person you authorise to act for you.",
+          "We use third-party information only where there is a lawful basis and a relevant operational need. If a new activity requires additional notice, we will provide it when appropriate.",
         ],
       },
       {
-        heading: "Sharing and international processing",
-        clauses: [
-          "We disclose information only as relevant to the purpose to categories of recipients such as payment-processing and card-network organisations; eSIM provisioning and telecommunications network operators; hosting, security and technical-support contractors; email delivery and customer-support contractors; professional advisers; and competent authorities where disclosure is lawful. Optional analytics or advertising recipients, if enabled, must be covered by the relevant notice and consent arrangements. We do not sell your personal information.",
-          "Recipients acting on our instructions must be subject to appropriate contractual and security requirements. Some recipients, particularly telecommunications networks, payment organisations and authorities, may determine their own legally permitted purposes and act as independent controllers. Their involvement does not remove Velusim's responsibility for its own collection, disclosures and controller obligations.",
-          "Travel connectivity can require information to be processed in your destination and in countries where relevant networks or technical recipients operate. A UK registered office does not mean all data stays in the UK. Where a restricted international transfer is involved, a valid legal transfer mechanism is required, such as applicable adequacy arrangements or approved contractual safeguards with any necessary supplementary measures. We do not treat acceptance of these Terms as blanket consent to unrestricted international transfers.",
-          "You may ask support@velusim.com which recipients, destination countries and transfer arrangements are relevant to your service and request information about applicable safeguards. We will provide the information required by law, including access to a copy of safeguards where applicable, with necessary protection for confidential information. Additional destination-specific privacy information will be provided where required.",
+        heading: "Purposes and legal bases",
+        blocks: [
+          {
+            table: {
+              head: ["Purpose", "Relevant information", "Legal basis where UK or EU GDPR applies"],
+              rows: [
+                [
+                  "Create and administer an account; process a requested purchase",
+                  "Contact, account, order and payment-status information",
+                  "Steps at your request before a contract and performance of the contract",
+                ],
+                [
+                  "Deliver an eSIM, administer a Plan and resolve a service problem",
+                  "Order, profile, installation, allowance and support information",
+                  "Performance of the contract",
+                ],
+                [
+                  "Maintain reliable systems and investigate technical faults",
+                  "Technical logs and relevant service records",
+                  "Legitimate interests in keeping the service secure and functioning; contract where needed to resolve your order",
+                ],
+                [
+                  "Prevent fraud, verify eligibility and protect accounts",
+                  "Relevant account, transaction and security information",
+                  "Legitimate interests in preventing misuse; legal obligation where a specific law requires a check",
+                ],
+                [
+                  "Keep required accounting records or respond to a lawful demand",
+                  "Necessary transaction and correspondence records",
+                  "Compliance with legal obligations",
+                ],
+                [
+                  "Handle complaints and establish, exercise or defend legal claims",
+                  "Relevant order, service and correspondence records",
+                  "Contract, legal obligations or legitimate interests in resolving disputes, as applicable",
+                ],
+                ["Send optional promotional email", "Email address and marketing preferences", "Consent"],
+                [
+                  "Use optional website analytics or marketing technologies, if enabled",
+                  "Identifiers and interaction information described in the cookie controls",
+                  "Consent",
+                ],
+              ],
+            },
+          },
+          "When relying on legitimate interests, we consider the impact on your rights and use information proportionately. We do not treat every business purpose as automatically overriding your privacy.",
+          "Information needed to take payment, fulfil an order or verify eligibility is necessary for the relevant transaction. If you do not provide it, we may be unable to complete the purchase or resolve the request. Optional marketing and optional tracking are not conditions of buying a Plan.",
         ],
       },
       {
-        heading: "Retention and protection",
-        clauses: [
-          "We retain account information for as long as needed to maintain the account and provide outstanding purchases, then assess whether a specific legal, security or dispute-related purpose requires continued retention. The absence of an installation deadline does not justify retaining every category of information indefinitely; only records needed to administer the outstanding entitlement or another justified purpose should remain.",
-          "Order, transaction and refund records are retained for applicable accounting, tax and claims periods. Support and complaint records are kept for the period reasonably needed to resolve the matter and any related challenge. Technical and security logs are retained according to their troubleshooting or security purpose and any applicable legal requirement, not simply for as long as the account exists. Marketing preference records may be retained in a minimal form to honour an opt-out.",
-          "Retention decisions consider the category and sensitivity of the information, the service and contract status, mandatory record-keeping periods, limitation periods, open disputes and whether the purpose can be achieved with less information. When no justified purpose remains, information should be deleted or irreversibly anonymised. A lawful hold may temporarily delay deletion of specifically relevant records. Contact us for the retention criteria applicable to a particular record.",
-          "We take reasonable and appropriate organisational and technical measures to protect information, proportionate to the processing and risks. No online service can promise absolute security. Keep your account and eSIM credentials private and report suspected misuse. Where a personal data breach occurs, we will meet applicable duties to assess, record and, where required, notify the relevant authority and affected individuals.",
+        heading: "Marketing and service messages",
+        blocks: [
+          "If you opt in to promotional emails, you can unsubscribe through the link in those messages or by emailing **info@kirosim.com**. Withdrawal of consent does not affect processing that was lawful before withdrawal.",
+          "Order confirmations, installation instructions, security notices and messages about an active complaint are service communications. Unsubscribing from marketing does not prevent necessary messages about your purchase.",
+          "We may retain a minimal suppression record to respect an unsubscribe request rather than inadvertently adding the address back to a mailing list.",
         ],
       },
       {
-        heading: "Your rights and choices",
-        clauses: [
-          "Depending on the applicable law and circumstances, you may request access to your information, correction of inaccurate data, erasure, restriction of processing and a portable copy of data where the portability right applies. These rights are not absolute; for example, some transaction information may need to be retained to meet a legal obligation or defend a claim. We will explain a refusal or limitation and available complaint routes.",
-          "You have the right to object to processing based on legitimate interests where the applicable conditions are met. You can object to direct marketing at any time, including associated profiling. We will stop processing for direct marketing when you object. Use the unsubscribe mechanism in the message or email support@velusim.com. Necessary order, security and service communications are not marketing and may still be sent.",
-          "You may withdraw consent at any time without affecting the lawfulness of processing before withdrawal. For optional technologies, use the Website's consent controls where provided or the further options explained in our Cookie Policy. You do not have to accept optional marketing to buy an eSIM.",
-          "Send rights requests to support@velusim.com. We may ask for proportionate verification, without demanding unnecessary identity documents. Requests are generally free and will be handled without undue delay within the applicable legal time limit, normally one month, subject to lawful extensions and procedural rules. We will explain any permitted extension, fee or refusal. You may also ask for an explanation and human review of an automated eligibility or fraud decision affecting you; additional safeguards apply where required by law.",
+        heading: "Who receives information",
+        blocks: [
+          "We disclose relevant information only to the extent needed for the purpose concerned. Recipient categories include:",
+          {
+            list: [
+              "payment-processing organisations, banks and card networks involved in payment, authentication, refunds and disputes;",
+              "eSIM provisioning organisations and mobile connectivity networks involved in delivering and operating the purchased service;",
+              "infrastructure, hosting, data-storage, security and technical support providers supporting the website and its operation;",
+              "email-delivery and customer-support providers where used to send service messages or handle requests;",
+              "analytics or marketing providers only where those optional functions are used with the required consent;",
+              "professional advisers where necessary for accounting, legal advice or a dispute; and",
+              "courts, regulators, law-enforcement bodies or other authorised recipients where disclosure is legally required or otherwise lawful and necessary.",
+            ],
+          },
+          "If the business is reorganised or transferred, relevant information may be disclosed under appropriate confidentiality and data-protection arrangements. We will explain a material change in responsibility for your information where required.",
+          "Service providers acting on our behalf must process information under appropriate instructions and safeguards. Independent controllers remain responsible for their own processing. Contact us for further information about recipients relevant to your data.",
         ],
       },
       {
-        heading: "Complaints, children and updates",
-        clauses: [
-          "If you believe your information has been mishandled, email support@velusim.com. We will acknowledge a data protection complaint within 30 days, take appropriate steps to investigate it and communicate the outcome without undue delay. A complaint and a request to exercise a data right have different legal requirements; making one does not cancel the other. Our Complaints Handling Policy provides further details.",
-          "You can complain to the UK Information Commissioner's Office at ico.org.uk/make-a-complaint/ or to another competent data protection authority where applicable, including the authority in your EEA country of residence. We encourage you to contact us first so we can address the issue, but do not make that a waiver of rights available under law.",
-          "Our services are restricted to people aged 18 and over and are not directed to children. If you believe an under-18 account or purchase has resulted in inappropriate collection of personal information, contact us. We will assess the circumstances and take appropriate action, retaining only information needed for a lawful purpose such as addressing the incident or resolving the transaction.",
-          "We will update this policy when relevant practices or legal requirements change and identify the revision date. Material new processing may require a specific notice or new consent before it begins. Continued use alone does not supply any consent the law requires us to obtain separately.",
+        heading: "International processing",
+        blocks: [
+          "Travel connectivity may involve processing in the country where a Plan is used, and supporting infrastructure may involve processing outside the United Kingdom or European Economic Area. The locations involved depend on the destination and service arrangements.",
+          "Where a transfer is subject to UK or EU transfer restrictions, we must have a lawful transfer basis. Depending on the destination and arrangement, this may be an applicable adequacy decision or approved contractual safeguards, together with any required assessment and supplementary measures. We do not treat the purchase of an international Plan as blanket consent to all overseas transfers.",
+          "You may contact **info@kirosim.com** for information about the locations and transfer safeguards relevant to your personal information, including a copy or description of applicable safeguards, subject to lawful redactions.",
+        ],
+      },
+      {
+        heading: "Retention",
+        blocks: [
+          "We retain identifiable information only for as long as needed for its purpose and applicable legal requirements. Retention is assessed by record type:",
+          {
+            list: [
+              "account information is needed while the account is active and for a proportionate period to complete closure, address unresolved matters and prevent misuse;",
+              "order, payment and refund records are retained for applicable accounting, tax, dispute and legal-claim requirements;",
+              "service and diagnostic records are retained according to their necessity for Plan administration, fault investigation and related disputes;",
+              "support correspondence is retained according to the issue, its resolution and any continuing legal need;",
+              "consent and suppression records are retained as needed to evidence and respect your choices; and",
+              "security logs are retained according to the incident-detection and investigation need, with longer preservation where a specific incident or legal obligation justifies it.",
+            ],
+          },
+          "The relevant criteria include the length of the customer relationship, whether an issue remains open, applicable statutory periods and whether the purpose can be achieved with anonymised data. We do not keep all categories indefinitely simply because an account once existed. At the end of the applicable period, records should be deleted or irreversibly anonymised; backup copies are subject to controlled retention and restricted use.",
+        ],
+      },
+      {
+        heading: "Security",
+        blocks: [
+          "We use measures appropriate to the nature of the information and the risks of processing. Access should be limited to people and organisations that need it for the relevant function. No online service can promise absolute security.",
+          "Protect your account credentials and eSIM installation details. If you suspect a data-security issue, contact **info@kirosim.com** promptly without including unnecessary sensitive information. Where a breach triggers a legal notification obligation, we will provide the required notification.",
+        ],
+      },
+      {
+        heading: "Your rights",
+        blocks: [
+          "Depending on applicable law and the circumstances, you may request access to your personal information, correction of inaccuracies, erasure, restriction of processing or a portable copy of information you provided. You may withdraw consent at any time.",
+          "**You have the right to object to processing based on legitimate interests on grounds relating to your situation. You also have the right to object to direct marketing at any time.**",
+          "Contact **info@kirosim.com** to exercise a right. We may ask for proportionate information to verify identity and protect another person's information. Requests are normally handled without charge and within one calendar month where UK or EU GDPR applies. Any lawful extension, clarification requirement or permitted fee or refusal will be explained within the applicable timeframe.",
+          "Rights are not absolute. For example, a deletion request does not necessarily require deletion of records that must be kept by law or are needed for a legal claim. We will explain any relevant limitation.",
+          "You may complain to the [UK Information Commissioner's Office](https://ico.org.uk/make-a-complaint/) or another competent data-protection authority, including an authority in your country of residence where applicable. You do not have to complain to us first.",
+        ],
+      },
+      {
+        heading: "Automated checks",
+        blocks: [
+          "Payment authentication, security screening and eligibility checks may involve automated tools. If an automated check prevents you from completing or accessing an order, you may contact us to explain your circumstances and request a review.",
+          "Where processing involves a solely automated decision with a legal or similarly significant effect, we will provide the information and safeguards required by applicable law, including applicable rights to challenge the decision and obtain human intervention. This clause is not consent to such decision-making.",
+        ],
+      },
+      {
+        heading: "Children and policy changes",
+        blocks: [
+          "Our service is intended for people aged 18 or over. If you believe a person under 18 has provided personal information to us in connection with an account or purchase, please contact us so that we can investigate and take appropriate action, including retaining only what is needed to resolve the matter or comply with law.",
+          "We may update this Policy to reflect changes in our activities or legal requirements. We will publish the revised version and provide additional notice where a material change requires it. A new policy does not retrospectively create consent for a new use of your information.",
         ],
       },
     ],
@@ -312,40 +371,278 @@ export const policies: Policy[] = [
     slug: "cookies",
     title: "Cookie Policy",
     shortTitle: "Cookies",
-    lastUpdated: "31 August 2026",
+    lastUpdated: LAST_UPDATED,
     summary:
-      "The cookies and similar technologies used on velusim.com, which are necessary or optional, and how to control them.",
+      "The cookies and similar technologies used on kirosim.com, which are necessary or optional, and how to control them.",
     sections: [
       {
-        heading: "Scope and responsibility",
-        clauses: [
-          "This Cookie Policy explains cookies and similar storage or access technologies associated with velusim.com. The Website is operated by COMPANY NAME LTD, company number COMPANY NUMBER, at COMPANY ADDRESS. Questions can be sent to support@velusim.com. Our Privacy Policy explains the handling of personal information more generally.",
-          "Cookies are small records stored in a browser or device. Related technologies can include browser storage, pixels and identifiers used to remember information or recognise an interaction. Similar legal rules can apply even where a technology is not called a cookie. A first-party or third-party label does not by itself determine whether consent is required.",
+        heading: "About this Policy",
+        blocks: [
+          "This Policy explains cookies and similar technologies used in connection with **kirosim.com**, operated by **BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, at **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Contact **info@kirosim.com** with questions.",
+          "Read this Policy together with our [Privacy Policy](https://kirosim.com/legal/privacy), which explains the handling of personal information, recipients, international processing and your rights.",
         ],
       },
       {
-        heading: "Necessary and optional purposes",
-        clauses: [
-          "Necessary technologies support functions such as account authentication, session security, fraud prevention connected with a requested transaction, order completion and recording privacy choices. We use a consent exemption only where its legal conditions are met. A technology is not essential merely because it is convenient for us or commercially useful.",
-          "Preference technologies may remember selections such as currency or display settings. Whether a particular use needs consent depends on its actual purpose and the applicable law. A preference requested by you is distinct from unrelated tracking. Optional preference storage should not be a condition for purchasing a Plan where it is not necessary for the transaction.",
-          "If analytics technologies are enabled, their purpose is to understand Website performance and interactions, such as errors or navigation. If advertising technologies are enabled, they may measure campaigns or support audience selection. This description does not mean every category is active. The specific technologies, purposes and choices must be identified in the consent information made available before the relevant optional use.",
-          "For technologies requiring consent, we will seek a clear affirmative choice before they operate. Continuing to browse, closing a banner or accepting the Terms does not by itself give valid consent. Where a lawful exception permits a limited use without consent, we must satisfy its conditions, provide the required information and make any required objection mechanism available. We will not apply a UK-specific exception where the rules applicable to your use require consent instead.",
+        heading: "Cookies and similar technologies",
+        blocks: [
+          "Cookies are small pieces of information stored on your device when you use a website. Similar technologies include browser storage and identifiers used by scripts or embedded functions. The same consent approach applies to technologies serving the same purpose, even if they are not technically cookies.",
+          "Session cookies usually expire when a browsing session ends. Persistent cookies or storage remain until their expiry or deletion. First-party technologies are associated with the website you visit; third-party technologies may be set by an organisation supplying an embedded function.",
+        ],
+      },
+      {
+        heading: "Categories and purposes",
+        blocks: [
+          "The categories below explain how technologies are classified. They do not mean that every category is active on every page. The website's Cookie Settings must identify the technologies actually in use and their purposes and lifetimes.",
+          {
+            table: {
+              head: ["Category", "Purpose", "Our approach"],
+              rows: [
+                [
+                  "Strictly necessary",
+                  "Functions such as keeping a requested login or checkout session secure, maintaining a basket and recording privacy choices",
+                  "Used without optional consent only where necessary for the requested service or communication",
+                ],
+                [
+                  "Preferences",
+                  "Remembering optional presentation choices or enhanced personalisation",
+                  "Consent before use unless the particular function qualifies as strictly necessary for a feature you request",
+                ],
+                [
+                  "Analytics",
+                  "Understanding website interactions and performance through optional measurement",
+                  "Enabled only after consent",
+                ],
+                [
+                  "Marketing",
+                  "Optional advertising measurement, audience functions or tracking across services",
+                  "Enabled only after consent",
+                ],
+              ],
+            },
+          },
+          "We do not treat an optional technology as necessary merely because it is commercially useful. Refusing optional technologies does not prevent you from using the core purchasing service.",
         ],
       },
       {
         heading: "Your choices",
-        clauses: [
-          "Where optional technologies are offered, the Website's consent interface must let you accept or reject optional use and change relevant category choices without treating rejection as acceptance. Necessary functions remain subject to their legal exemption. Withdrawal should be as easy as giving consent and does not affect the lawfulness of previous processing.",
-          "Use the cookie or privacy settings available on the Website to review or withdraw choices. If you cannot locate or use the control, email support@velusim.com for assistance. Your browser can also block or delete cookies and manage site storage. Blocking necessary storage may prevent sign-in or checkout; refusal of optional tracking should not prevent access to the basic purchase service.",
-          "Choices may be specific to a browser or device. Clearing storage, changing browser or using another device can remove a stored choice, so the Website may ask again. Removing a cookie is not always the same as withdrawing consent for future use; update the relevant consent setting as well where available.",
+        blocks: [
+          "Where optional technologies are offered, the consent interface lets you accept them, reject them or choose by category. Optional categories remain disabled unless you choose to enable them. Continuing to browse or accepting the Terms & Conditions is not cookie consent.",
+          "You can reopen **Cookie Settings** through the website footer to change or withdraw your choices. Withdrawal stops future use of the affected optional technologies; it does not retrospectively invalidate processing already carried out lawfully. Where information already stored on your device cannot be removed through those controls, you can delete it through your browser settings.",
+          "Choices may be specific to your browser and device. Clearing cookies or switching browsers may remove the stored record of your choice and cause the website to ask again.",
         ],
       },
       {
-        heading: "Duration, recipients and further information",
-        clauses: [
-          "Session storage normally lasts for the session, while persistent storage remains until its configured expiry or deletion, subject to browser behaviour. There is no single retention period for all cookies. The live cookie information must identify the technologies in use, their purpose, responsible organisation or sufficiently specific recipient category, duration and the applicable choice.",
-          "Where a technology causes information to be disclosed to a payment, security, technical, analytics or advertising recipient, that disclosure must be explained and have an appropriate legal basis. Only categories actually used apply. If the processing involves personal information or an international transfer, the safeguards and rights described in the Privacy Policy also apply. Optional tracking consent is not permission for unrelated processing.",
-          "We will review this policy when the Website's technologies change and update the information and consent arrangements before introducing uses requiring a new choice. For information about a specific technology or to raise a concern, contact support@velusim.com. Our Privacy Policy and Complaints Handling Policy describe the available rights and complaint routes.",
+        heading: "Technology details and duration",
+        blocks: [
+          "Before an optional technology is enabled, Cookie Settings provides its name or identifying description, purpose, category, duration and whether it is first-party or third-party. Where information is shared, the relevant recipient or sufficiently specific recipient category is also explained.",
+          "Retention differs between technologies; this Policy does not assign an invented universal duration. Stored preferences, authentication sessions and analytics identifiers should each have a duration appropriate to their purpose. The details shown in Cookie Settings form part of the information provided under this Policy.",
+        ],
+      },
+      {
+        heading: "Browser controls and external services",
+        blocks: [
+          "Your browser may allow you to inspect, block or delete cookies and other storage. Blocking necessary technologies may prevent login, checkout or other functions you request. Browser controls may operate separately from the site's controls and may not affect every type of similar technology.",
+          "Following a link to a separate website makes that website's own privacy and cookie arrangements relevant. An external link does not grant permission for optional tracking on Kirosim before you follow it.",
+        ],
+      },
+      {
+        heading: "Updates and contact",
+        blocks: [
+          "We will update this Policy and the technology details when relevant changes occur. Where a change requires a new choice, we will seek consent before enabling the affected optional use. For help with cookie choices, email **info@kirosim.com**.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "refund-cancellation",
+    title: "Refund & Cancellation Policy",
+    shortTitle: "Refund Policy",
+    lastUpdated: LAST_UPDATED,
+    summary:
+      "How the 14-day change-of-mind offer works and the separate remedies for faulty, unavailable or undelivered eSIMs.",
+    sections: [
+      {
+        heading: "Scope and contact",
+        blocks: [
+          "This Policy applies to purchases made directly from **BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim** at **kirosim.com**. Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Send cancellation and refund requests to **info@kirosim.com**.",
+          "This Policy distinguishes our commercial change-of-mind offer from mandatory legal rights. Nothing here limits remedies for a service that is undelivered, defective, misdescribed or otherwise not supplied as required by law.",
+        ],
+      },
+      {
+        heading: "Our 14-day change-of-mind offer",
+        blocks: [
+          "You may cancel a purchased eSIM for a full refund if you notify us within **14 calendar days after the contract is concluded** and the eSIM remains **uninstalled and unused** when you give notice. The day after the contract is concluded is day one. Your confirmation identifies the purchase concerned.",
+          "This offer covers, for example, a cancelled trip, a mistaken destination or a device-compatibility problem discovered before installation. Receiving installation instructions, opening the order page or viewing a QR code does not by itself make the eSIM installed or used.",
+          "After sending a cancellation request, do not install, use, transfer or redeem the affected eSIM. We may verify installation and usage status against relevant service records. If records appear incorrect, you may provide information so that we can review them.",
+          "No cancellation administration fee applies to an eligible refund under this offer. The amount returned is the amount actually paid for the cancelled item, taking account of discounts applied to it.",
+        ],
+      },
+      {
+        heading: "Installation and statutory cancellation rights",
+        blocks: [
+          "**Installation starts the Plan's validity immediately**, even if you have not reached the destination or used data. Installation ends eligibility for the commercial offer in the section above. It does not automatically end your legal cancellation rights.",
+          "Where the law gives you a cooling-off right, the applicable period and any lawful extension remain available. For UK consumers, a service contract normally has a 14-day cancellation period beginning after the contract is concluded.",
+          "If you expressly request that a service begin during that period and then cancel before it is fully performed, we may charge only an amount permitted by law for the service actually supplied before your cancellation. Any charge must be proportionate, properly explained and subject to the required pre-contract information and express request having been provided. We will not impose a charge where the law prohibits it.",
+          "For a service contract, the statutory right is lost on full performance during the cancellation period only where the legally required express request or consent and acknowledgement have been obtained. Starting the service is not the same as fully performing it.",
+          "If a separately supplied element legally qualifies as digital content, different rules may apply to the loss of the cancellation right when supply begins. We will rely on that exception only where its legal conditions are met, including the necessary prior express consent, acknowledgement and confirmation. Merely emailing a QR code is not treated as a blanket waiver for the entire purchase.",
+          "If we did not provide legally required cancellation information, your rights may continue beyond the ordinary period. The commercial conditions in the section above do not shorten any statutory entitlement.",
+        ],
+      },
+      {
+        heading: "Undelivered, invalid or faulty eSIMs",
+        blocks: [
+          "Contact us if installation credentials do not arrive, cannot be accessed, are invalid or fail to provide the purchased service. We will investigate and offer the remedy required by the circumstances and applicable law, which may include correcting fulfilment, restoring service, supplying an appropriate replacement or issuing a full or partial refund.",
+          "If we cannot supply the purchased service at all, a full refund will normally be due. If only part of the service was properly supplied, the appropriate remedy will take account of the affected portion, the seriousness of the failure and your legal rights. We will not assess every service-quality issue solely by whether some data was consumed.",
+          "Where the law gives you a choice of remedy, we will respect that choice. We will not require acceptance of store credit or a materially different Plan instead of a monetary refund to which you are entitled.",
+          "The 14-day change-of-mind period is not a deadline for reporting all faults or exercising all legal remedies.",
+        ],
+      },
+      {
+        heading: "Helping us investigate",
+        blocks: [
+          "Please provide your order reference, purchase email, destination, device model, installation status and a short explanation. Relevant screenshots or error messages can help. Conceal unrelated personal information and never send passwords, full card details or card security codes.",
+          "Report connectivity problems promptly, preferably while you are still at the destination, so that the network conditions can be investigated. A delayed report may affect the evidence available but does not automatically cancel a legal right.",
+          "Follow reasonable troubleshooting instructions that are relevant and safe. Do not delete the eSIM unless instructed, because deletion may prevent reinstallation or make diagnosis harder. Failure to complete unreasonable or unnecessary troubleshooting is not a basis for withholding a remedy required by law.",
+        ],
+      },
+      {
+        heading: "Situations that do not normally qualify for a commercial refund",
+        blocks: [
+          "Outside the 14-day change-of-mind offer, a discretionary change-of-mind refund is not normally available solely because:",
+          {
+            list: [
+              "travel plans change after installation;",
+              "you install early and the validity period expires before or during your trip;",
+              "you do not use all the allowance during the agreed validity period;",
+              "you buy an unsuitable Plan or use an incompatible or locked device despite accurate pre-purchase information;",
+              "you attempt to use the service outside the Plan's coverage or in a restricted country;",
+              "you delete a correctly functioning profile or attempt an unsupported transfer; or",
+              "you incur separate charges on your ordinary mobile SIM.",
+            ],
+          },
+          "These examples do not exclude a refund where our information was inaccurate, our instructions caused the problem, the service failed to meet the agreement, or applicable law requires another outcome.",
+        ],
+      },
+      {
+        heading: "Top-ups, duplicate charges and unauthorised transactions",
+        blocks: [
+          "For an optional Top-up, we offer the same 14-day change-of-mind period if the Top-up remains unactivated and unused. Its activation and validity rules must be explained before payment. A Top-up that activates immediately on purchase may therefore fall outside this commercial offer; statutory rights remain unaffected.",
+          "Tell us promptly about a suspected duplicate charge or unauthorised transaction. We will investigate and return an incorrect charge where established. We may need proportionate verification to protect the account and payment holder. You retain any rights against your card issuer under applicable law or card arrangements.",
+          "If a card dispute and a direct refund concern the same charge, tell us so that they can be coordinated and duplicate reimbursement avoided. You are not required to waive a lawful dispute right to have a legitimate complaint considered.",
+        ],
+      },
+      {
+        heading: "How refunds are made",
+        blocks: [
+          "Refunds are made to the original payment method unless you expressly agree otherwise or a legally permitted alternative is necessary because that method cannot receive the refund. You will not be required to accept credit in place of a refund legally due.",
+          "For a valid statutory cancellation, we will reimburse you without undue delay and within the applicable legal period; where UK cancellation rules apply, this is normally no later than 14 days after we are informed of your decision to cancel. For other agreed refunds, we will initiate the refund without undue delay and normally within 14 calendar days after confirming the entitlement, or sooner where required by law. An internal review does not extend a statutory deadline.",
+          "Refunds are issued in the original transaction currency. A card issuer's conversion may cause the amount in your account currency to differ from the original debit. We do not impose a refund fee. Separate issuer charges are governed by your issuer's terms, without excluding any liability we may have under law.",
+          "The time for a refund to appear on your statement depends on the issuer's processing. We can confirm when the refund was initiated and provide available tracing information if it does not arrive.",
+        ],
+      },
+      {
+        heading: "Giving cancellation notice",
+        blocks: [
+          "Email **info@kirosim.com** with a clear statement that you wish to cancel and enough information to identify the purchase. You may use the optional form below, but using it is not a condition of cancellation. Where a statutory deadline applies, sending a clear notice before it expires is sufficient; our later response does not make the notice late.",
+          "**Optional cancellation form**",
+          "To: BRIGHTCORE ENTERTAINMENT LTD, Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH; info@kirosim.com.",
+          "I/We hereby give notice that I/We cancel my/our contract for the following service:",
+          {
+            list: [
+              "Plan or service:",
+              "Order reference:",
+              "Ordered on:",
+              "Name of consumer(s):",
+              "Address of consumer(s):",
+              "Email used for the purchase:",
+              "Date:",
+              "Signature of consumer(s), only if this notice is sent on paper:",
+            ],
+          },
+          "Delete whichever of “I/We” and “my/our” does not apply. No physical eSIM return is required.",
+        ],
+      },
+      {
+        heading: "Review of a decision",
+        blocks: [
+          "If you disagree with an outcome, reply to our decision or email **info@kirosim.com** with the reason and any additional evidence. The [Complaints Handling Policy](https://kirosim.com/legal/complaints) explains the review process. It does not restrict access to your card issuer, a competent authority or the courts.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "delivery-activation",
+    title: "Digital Delivery & Activation Policy",
+    shortTitle: "Delivery & Activation",
+    lastUpdated: LAST_UPDATED,
+    summary:
+      "How your eSIM is delivered electronically, what to do if credentials are missing, and when your Plan's validity begins.",
+    sections: [
+      {
+        heading: "Electronic delivery",
+        blocks: [
+          "**BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim**, supplies travel eSIMs electronically through **kirosim.com**. Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Delivery and installation enquiries should be sent to **info@kirosim.com**.",
+          "No physical SIM, parcel or postal delivery is included. Following successful payment and order processing, your installation credentials and instructions are made available through the order or account interface and sent to the email address provided for the order.",
+        ],
+      },
+      {
+        heading: "Timing and order confirmation",
+        blocks: [
+          "We aim to fulfil orders promptly after payment and order processing. Any specific delivery timeframe shown before payment forms part of the order information. Payment verification, provisioning or technical issues may cause a delay; we will address a failure to meet the agreed timeframe under the agreement and applicable law.",
+          "A successful card authorisation alone does not prove that usable credentials have been delivered. Keep the order confirmation, Plan details and applicable policy version for reference.",
+        ],
+      },
+      {
+        heading: "Missing or inaccessible credentials",
+        blocks: [
+          "If your email does not arrive, check the order or account page and your spam folder. Confirm that you used the correct email address. Contact us with the order reference if credentials remain missing, inaccessible or invalid.",
+          "If you entered the wrong email, tell us promptly. We may verify ownership before correcting delivery details or resending credentials. If a code may have been exposed to someone else, tell us so that we can assess whether it can be secured or replaced.",
+          "Access to usable credentials in your account may allow installation while an email is delayed. However, an inaccessible or invalid code is not successful delivery simply because an email was sent. If we cannot fulfil the order as agreed, the [Refund & Cancellation Policy](https://kirosim.com/legal/refund-cancellation) applies.",
+        ],
+      },
+      {
+        heading: "Before installation",
+        blocks: [
+          "Check that the device is eSIM-compatible and network-unlocked, and establish an internet connection for setup. Follow the instructions supplied for your device and Plan. A device family name alone may not establish compatibility for every regional model.",
+          "Check your travel dates and the Plan duration before proceeding. If any installation deadline applies, it must be stated before purchase and in your order information. Contact us if that information is unclear; an undisclosed deadline will not be added retrospectively to your order.",
+        ],
+      },
+      {
+        heading: "When validity starts",
+        blocks: [
+          "**Successful installation of the eSIM starts the purchased Plan's validity period immediately.** It does not wait for arrival in the destination, connection to a foreign network or first data use.",
+          "Receiving an email, downloading instructions or viewing a QR code does not itself install the profile. Completing the profile installation does. Install only when you are ready for the validity period to run.",
+          "After installation, the period runs continuously. Switching off the device, turning off the profile, removing it, travelling outside coverage or leaving data unused does not pause or restart the period. If the expiry information does not reflect the duration purchased, contact us for investigation and correction.",
+        ],
+      },
+      {
+        heading: "Connecting after installation",
+        blocks: [
+          "To use connectivity, you may need to enable the installed profile, select it for mobile data, enable data roaming for that profile and apply the settings in the instructions. These steps enable connectivity; they do not postpone the validity start established by installation.",
+          "Keep settings for your ordinary SIM separate. Enabling roaming on your ordinary SIM may incur charges from your existing provider. Any voice, SMS, hotspot or other feature must be included in the Plan to be available.",
+          "Connectivity is limited to the Plan's stated destinations and remains subject to the restricted-country rules in the [Terms & Conditions](https://kirosim.com/legal/terms). Installation does not override those restrictions or guarantee network reception everywhere.",
+        ],
+      },
+      {
+        heading: "QR-code security, deletion and transfers",
+        blocks: [
+          "Treat QR codes and manual installation credentials as confidential. Do not post them publicly or provide them to an unknown person. A copy of a QR image does not create another licensed eSIM or guarantee another installation.",
+          "Do not assume that a profile can be installed on multiple devices, transferred or reinstalled after deletion. These functions depend on the profile and device. Contact us before deleting an eSIM, resetting a device or attempting a transfer.",
+          "If replacement is possible and chargeable, we will explain the cost before you agree. No replacement fee will displace a remedy we must provide without charge under law.",
+        ],
+      },
+      {
+        heading: "Top-ups",
+        blocks: [
+          "Top-ups are available only for eligible eSIMs and require a separate purchase. Before payment, the Top-up description must explain when its allowance becomes available, when its own validity starts and whether it affects an existing allowance or expiry date.",
+          "A Top-up does not automatically repair a deleted, incompatible or unusable profile. Verify that the correct eSIM is selected before paying. No Top-up is purchased or charged automatically.",
+        ],
+      },
+      {
+        heading: "Help and remedies",
+        blocks: [
+          "Email **info@kirosim.com** with the order reference, device model, destination and relevant error details. Do not send passwords, full card information or unnecessary personal information in screenshots.",
+          "Delivery, installation and service availability are distinct stages. Receiving a QR code does not by itself remove cancellation or fault-related rights. See the [Refund & Cancellation Policy](https://kirosim.com/legal/refund-cancellation) for the available remedies.",
         ],
       },
     ],
@@ -354,50 +651,79 @@ export const policies: Policy[] = [
     slug: "acceptable-use",
     title: "Acceptable Use & Fair Usage Policy",
     shortTitle: "Acceptable Use",
-    lastUpdated: "31 August 2026",
+    lastUpdated: LAST_UPDATED,
     summary:
-      "The rules for lawful use of Velusim eSIMs and networks, how allowances and Unlimited Plans work, and enforcement.",
+      "The rules for lawful use of Kirosim eSIMs and networks, how allowances and unlimited Plans work, and enforcement.",
     sections: [
       {
-        heading: "Purpose and scope",
-        clauses: [
-          "This policy covers COMPANY NAME LTD's eSIMs, Plans, Top-ups, accounts and Website at velusim.com. Company number: COMPANY NUMBER. Registered office: COMPANY ADDRESS. For permitted-use enquiries or restrictions, contact support@velusim.com.",
-          "Read this policy with the Terms & Conditions and your Plan description. It protects lawful use and network integrity without creating undisclosed limits, permitting arbitrary cancellation or reducing mandatory rights. Services are restricted to users aged 18 and over.",
+        heading: "Scope",
+        blocks: [
+          "This Policy applies to Kirosim accounts, eSIMs and Plans supplied by **BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, at **kirosim.com**. Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Contact **info@kirosim.com** about an issue or restriction.",
+          "Read this Policy with the [Terms & Conditions](https://kirosim.com/legal/terms) and the description of your Plan. It distinguishes prohibited conduct from technical limits attached to a particular package.",
         ],
       },
       {
-        heading: "Lawful and responsible use",
-        clauses: [
-          "Do not use the service for fraud, identity theft, payment abuse, harassment, threats, unlawful surveillance, illegal material or infringement of others' rights. Comply with laws applicable to your activity and location. Lawful criticism of Velusim and genuine complaints are not prohibited.",
-          "Do not send unsolicited bulk SMS, carry out unlawful automated calling, spoof identities for deceptive purposes, conduct phishing campaigns or distribute malware. Do not use calling or messaging allowances for call pumping, artificial traffic generation, interconnection-revenue manipulation or evasion of charges.",
-          "Do not attempt unauthorised access to devices, accounts, networks or systems; disrupt service through denial-of-service activity; tamper with eSIM credentials; clone a profile; or bypass technical protections and properly disclosed Plan limits. Security testing requires express authorisation from the party entitled to grant it.",
-          "Do not use false identities or payment details, abuse refunds, create deceptive duplicate accounts to obtain promotional benefits, or resell or commercially redistribute our eSIM profiles without written permission. Sharing a connection through a permitted personal hotspot is not treated as commercial resale merely because another travel companion connects.",
+        heading: "Lawful and authorised use",
+        blocks: [
+          "You must be at least 18 and use the service in compliance with applicable law, the Plan's coverage and our restricted-country rules. You must not:",
+          {
+            list: [
+              "use stolen payment details, another person's identity or unauthorised account access;",
+              "conceal relevant details to evade geographic restrictions or security checks;",
+              "distribute malware, carry out denial-of-service attacks or attempt unauthorised access to networks or systems;",
+              "use the service for fraud, scams, unlawful harassment or distribution of unlawful material;",
+              "send unlawful bulk messages or operate abusive automated communications;",
+              "interfere with provisioning, metering, charging or security controls;",
+              "copy, clone, publicly distribute or unlawfully resell eSIM credentials; or",
+              "exploit an error to obtain service or refunds to which you are not entitled.",
+            ],
+          },
+          "Use is intended for personal travel connectivity. Commercial resale, operating a public connectivity service or deploying the Plan as infrastructure for a commercial communications operation requires our prior agreement. Ordinary lawful personal browsing, messaging, streaming or use of security tools is not prohibited solely by its category.",
         ],
       },
       {
-        heading: "Geographic and compliance restrictions",
-        clauses: [
-          "You must comply with the restricted-country provisions in the Terms & Conditions. Velusim does not make its services available in Sudan, Democratic Republic of the Congo, Iran, Mali, Myanmar (Burma), North Korea, South Sudan, Syria, Yemen, Afghanistan, Belarus, Central African Republic, Cuba, Haiti, Iraq, Russia, Somalia, Venezuela or Zimbabwe. Regional or global coverage descriptions do not override these restrictions.",
-          "Do not circumvent a restriction or use the service for a person or transaction prohibited by sanctions or other applicable law. This policy does not prohibit a lawful privacy tool solely because it is a privacy tool; the prohibited conduct is using it to conceal a disqualifying transaction or evade a restriction. We may ask for proportionate information where a genuine compliance issue needs clarification.",
+        heading: "Allowances and expiry",
+        blocks: [
+          "For a fixed-data Plan, the purchased allowance and validity apply as stated before payment. Background applications, updates and connected devices can consume allowance. Monitor device settings and any available usage information; reporting may not be instantaneous.",
+          "The original Plan's validity begins on successful eSIM installation. Unused allowance expires at the stated end of the Plan unless rollover is expressly included. Top-ups have the separately disclosed conditions shown before their purchase.",
+          "Usage disagreements may be referred to **info@kirosim.com**. We will consider the relevant records and your explanation; our records are not declared conclusive in every dispute.",
         ],
       },
       {
-        heading: "Allowances, Unlimited Plans and network management",
-        clauses: [
-          "Each Plan has the allowances and validity shown before purchase. Validity starts after successful installation. Data, voice and SMS allowances are separate unless the Plan expressly combines them. Exhausting one feature does not automatically expand another. Background device activity can consume data, and some calling or messaging destinations may be outside the included allowance.",
-          "Unlimited applies only to the feature identified as unlimited. Any high-speed allowance, reduced-speed level, daily reset, hotspot limit, excluded destination or other material restriction must be clearly disclosed before payment. A reference to fair use alone is not a substitute for explaining those limits. Where no numerical restriction was disclosed, we will not invent one retrospectively for an existing purchase.",
-          "If a Plan includes a disclosed high-speed allowance followed by lower-speed service, reaching that allowance may trigger the specified reduction for the stated period. Whether speed or allowances reset daily, on another cycle or not at all must be shown for that Plan. Unlimited data does not promise a particular speed at all times or immunity from congestion.",
-          "Hotspot and tethering use is permitted only to the extent supported and described for the selected Plan. Any quantitative tethering restriction or exclusion must be disclosed before purchase. We will not describe permitted personal hotspot use as abuse simply because you use a substantial portion of an advertised allowance.",
-          "Proportionate network management may address congestion or security risks, subject to telecommunications and open-internet rules. It must not disguise a materially different service from the one sold. Your rights to information and remedies remain in place.",
+        heading: "Unlimited Plans and fair usage",
+        blocks: [
+          "Where an unlimited Plan is offered, “unlimited” describes the data allowance subject to the material conditions disclosed for that Plan. It does not promise uninterrupted maximum speed or unrestricted use on any device or network.",
+          "Before purchase, the Plan description must identify any applicable high-speed allowance, fair-use threshold, reduced speed, reset interval, hotspot allowance or restriction on supported use. A general reference to “fair use” is not a substitute for disclosing a material limit.",
+          "We will not impose an undisclosed numerical cap or reduce service solely because lawful use is considered “excessive” without an applicable disclosed condition or a genuine, proportionate network-protection reason. This Policy does not invent a universal daily allowance or reduced speed for all Plans.",
         ],
       },
       {
-        heading: "Investigation, restrictions and review",
-        clauses: [
-          "We may investigate reasonably suspected prohibited use using lawfully available information, subject to the Privacy Policy and telecommunications confidentiality rules. This is not an unrestricted right to inspect private communications.",
-          "Depending on the risk, we may issue a warning, request that the activity stop, restrict the affected feature or temporarily suspend the relevant account or eSIM. We will use a proportionate response and give an explanation and opportunity to correct the issue where practicable. Immediate restriction may be necessary to prevent harm or comply with law, and some details may be legally restricted.",
-          "We may terminate an affected service for a serious or repeated material breach where justified. Refunds, any lawful deductions and the treatment of remaining prepaid service will be assessed under the Refund & Cancellation Policy and applicable law. We do not impose an automatic forfeiture of every purchase or a punitive fee simply because an account was reviewed.",
-          "To challenge a restriction, email support@velusim.com with the order reference and explanation. We will review it and restore service where appropriate. Further review follows the Complaints Handling Policy. Lawful refunds, complaints and payment disputes are not prohibited use.",
+        heading: "Hotspot and device sharing",
+        blocks: [
+          "Hotspot or tethering is permitted where supported by the Plan and device. It may share the main allowance or have a separate disclosed allowance. Connected devices can use data rapidly through updates or background activity.",
+          "Hotspot support does not authorise resale of connectivity or sharing eSIM credentials. You are responsible for taking reasonable steps to secure a hotspot you operate and stopping misuse that you become aware of.",
+        ],
+      },
+      {
+        heading: "Network protection and technical management",
+        blocks: [
+          "Networks may need to manage congestion, address attacks, maintain systems or comply with law. Temporary technical management must not be used as an undisclosed permanent limitation inconsistent with what was sold.",
+          "Normal variation in mobile performance is distinct from a promised feature being unavailable. If a restriction materially prevents provision of the purchased service, the [Refund & Cancellation Policy](https://kirosim.com/legal/refund-cancellation) and applicable remedies remain relevant.",
+        ],
+      },
+      {
+        heading: "Investigation and enforcement",
+        blocks: [
+          "Where there is reasonable evidence of a breach, we may investigate, warn you, require the conduct to stop, restrict the affected function or suspend or terminate the affected service. The action should reflect the seriousness, urgency and impact of the issue.",
+          "Where possible and lawful, we will explain the reason and give an opportunity to correct a remediable issue. Immediate action may be necessary for a security threat, serious unlawful use or a legal order. We will not disclose security-sensitive details where doing so would compromise a legitimate investigation.",
+          "A suspected breach does not automatically justify confiscating an unused balance or denying every refund. Financial consequences must be lawful and proportionate. Mandatory rights remain available.",
+        ],
+      },
+      {
+        heading: "Review and reporting",
+        blocks: [
+          "To challenge a restriction, email **info@kirosim.com** with your order reference and relevant explanation. We will review the available information and correct a restriction applied in error where possible. Any unresolved dispute can be escalated under the [Complaints Handling Policy](https://kirosim.com/legal/complaints).",
+          "Report a compromised account, exposed QR code or suspected misuse promptly. Do not include another person's unnecessary personal information in a report.",
         ],
       },
     ],
@@ -406,54 +732,66 @@ export const policies: Policy[] = [
     slug: "complaints",
     title: "Complaints Handling Policy",
     shortTitle: "Complaints",
-    lastUpdated: "31 August 2026",
+    lastUpdated: LAST_UPDATED,
     summary:
-      "How to raise a complaint with COMPANY NAME LTD, how it is investigated, time limits, and independent routes available to you.",
+      "How to raise a complaint with BRIGHTCORE ENTERTAINMENT LTD, how it is investigated, time limits, and independent routes available to you.",
     sections: [
       {
         heading: "Who handles complaints",
-        clauses: [
-          "COMPANY NAME LTD handles complaints about purchases and services sold through velusim.com. Our company number is COMPANY NUMBER. Our registered office is COMPANY ADDRESS. Email support@velusim.com to complain about an order, payment, eSIM, connection, customer-support interaction or privacy matter.",
-          "We will consider complaints fairly, take reasonable and proportionate steps to investigate them and explain the outcome. Making a complaint does not waive your consumer, privacy, payment-dispute or court rights. We do not charge a fee merely for receiving and investigating a complaint.",
+        blocks: [
+          "**BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim**, handles complaints about purchases and services at **kirosim.com**.",
+          "Contact us at **info@kirosim.com** or write to **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. You do not need to use a particular form or pay a fee to complain.",
         ],
       },
       {
-        heading: "Submitting a complaint",
-        clauses: [
-          "Include your name, order email, order reference if available, the affected Plan, a description of what happened, relevant dates and the outcome you are seeking. A suggested subject line is \"Complaint - order reference\", but no specific wording or form is required. If you want to cancel or request a refund, say so clearly; the relevant request date is not postponed by our complaint process.",
-          "If email is not accessible to you, send your complaint to the registered office above. Tell us if you need information in an accessible format or reasonable assistance communicating with us. An authorised representative may complain for you; we may verify their authority before disclosing personal information. We will not require unnecessary medical or other sensitive information to consider an accessibility request.",
-          "Keep evidence that may help, such as order confirmations, relevant error messages or screenshots with unrelated information removed. Do not send passwords, full payment-card details or card security codes. Where a service issue is ongoing, include the destination, device model and installation status so we can investigate promptly.",
+        heading: "What to include",
+        blocks: [
+          "Please explain the problem, what happened and the outcome you are seeking. An order reference, purchase email, relevant dates, device model and destination can help us locate the issue. Provide only information relevant to the complaint.",
+          "Do not send account passwords, full payment-card information or card security codes. Conceal unrelated personal information in screenshots. If someone complains on your behalf, we may request reasonable evidence of their authority before sharing your information.",
+          "If you need an adjustment to communicate with us, explain what would help and we will consider a reasonable alternative.",
         ],
       },
       {
-        heading: "Investigation and communication",
-        clauses: [
-          "We will acknowledge the complaint promptly, request any information reasonably needed and take active steps towards resolution. We will explain the next steps and provide updates where investigation cannot be completed immediately.",
-          "We may review the Plan description, fulfilment and installation information, relevant usage, technical and payment records, and earlier correspondence. We may consult involved technical or network organisations, but COMPANY NAME LTD remains responsible for addressing its own contractual obligations.",
-          "We will work to resolve the complaint without undue delay and within applicable legal deadlines. If it takes longer, we will explain the outstanding issue and expected next step. Please respond to reasonable information requests; an unanswered request does not automatically extinguish a legal claim.",
-          "Our outcome will explain the decision, reasons and any remedy, such as technical correction, an agreed replacement, refund or price adjustment. If we consider no remedy due, we will explain why and how to request a review.",
+        heading: "Our process",
+        blocks: [
+          "We will record the complaint, identify the issue and review relevant order, payment, service and correspondence records. We may ask focused questions or seek technical information from organisations involved in providing the service.",
+          "We aim to acknowledge complaints within **two business days** and provide a substantive response within **15 business days**. For these targets, business days are Monday to Friday excluding public holidays in England and Wales. These are handling targets, not a promise that every technical issue can be resolved within that period.",
+          "If more time is needed, we will explain the reason and provide an expected update date. These targets do not extend a statutory refund deadline, privacy-request deadline or any other mandatory time limit. A cancellation notice takes effect according to the applicable cancellation rules, not when our investigation ends.",
         ],
       },
       {
-        heading: "Refund and privacy time limits",
-        clauses: [
-          "The 14-day change-of-mind cancellation period is explained in the Refund & Cancellation Policy. A cancellation request made in time remains timely even if support or complaint handling continues beyond the period. Statutory refund deadlines are not extended merely because we have opened an internal investigation.",
-          "For a data protection complaint, we will acknowledge receipt within 30 days, take appropriate steps to investigate and communicate the outcome without undue delay. If the correspondence also contains a data-access, erasure or other rights request, we will address it under its separate legal requirements, normally within one month subject to applicable rules. A complaint acknowledgement is not a substitute for a rights-request response.",
+        heading: "Connectivity problems during travel",
+        blocks: [
+          "If the problem concerns an active trip, include the destination and the nature of the connection failure so that we can assess its urgency. Report the issue while it is occurring where possible. Do not delete the eSIM unless instructed.",
+          "This complaints process is not an emergency service. Use an appropriate alternative means to contact emergency services or obtain essential assistance.",
         ],
       },
       {
-        heading: "Review and independent routes",
-        clauses: [
-          "If you disagree with our response, reply to support@velusim.com and request a review, identifying what you believe was missed or decided incorrectly. We will arrange an appropriate reconsideration, by another responsible person where practicable, and explain the result. An internal review is not a condition that overrides access to an independent route available under law.",
-          "Where your complaint is covered by mandatory telecommunications alternative dispute resolution requirements, we will provide the information and access required by those rules. Under applicable UK telecommunications rules, eligible unresolved complaints can generally be referred after six weeks from the initial complaint, or earlier following a deadlock notice. We will identify the relevant route and provide any required notice for a qualifying complaint. This policy does not claim membership of a particular scheme or remove any obligation to participate where required.",
-          "For privacy concerns, you may complain to the UK Information Commissioner's Office through ico.org.uk/make-a-complaint/ or another competent authority where applicable. For other matters, you may use consumer-protection, card-issuer, regulatory or court routes available to you. A regulator may not determine an individual contractual claim; the appropriate route depends on the issue.",
+        heading: "Our response",
+        blocks: [
+          "Our response will explain the issue considered, the outcome and its main reasons. Where appropriate, it will describe the corrective action, replacement, refund or other remedy and any further steps needed.",
+          "We will assess the complaint on its merits and under the applicable purchase terms and law. We will not reject a complaint merely because it was expressed informally or did not cite a legal provision.",
         ],
       },
       {
-        heading: "Records and fair treatment",
-        clauses: [
-          "Complaint information will be used to investigate and document the matter, implement the outcome, identify relevant service improvements and meet legal requirements, in accordance with the Privacy Policy. We will limit disclosure to those who need it and retain records according to the complaint, legal and dispute-related purposes.",
-          "Communications must not contain threats, harassment or knowingly false evidence. We may proportionately restrict an unsafe channel while keeping a reasonable way to progress the complaint. Persistence, dissatisfaction or lawful criticism alone are not grounds to reject a genuine complaint.",
+        heading: "Asking for a review",
+        blocks: [
+          "If you disagree with the response, reply or email **info@kirosim.com** explaining which part you dispute and provide any additional information. We will arrange a further review, by another person where practicable, and explain the resulting position.",
+          "You do not have to repeat information already reasonably available to us. The review does not remove or postpone an external right or deadline.",
+        ],
+      },
+      {
+        heading: "External rights",
+        blocks: [
+          "You may seek independent advice, contact your card issuer about rights relating to a transaction, approach a competent consumer-protection authority or bring a claim in a court with jurisdiction. Our internal process is not a mandatory substitute for those routes.",
+          "For a privacy concern, you may contact the [UK Information Commissioner's Office](https://ico.org.uk/make-a-complaint/) or another competent data-protection authority. See our [Privacy Policy](https://kirosim.com/legal/privacy).",
+          "Where applicable law requires us to provide details of an alternative dispute-resolution body or state whether we will participate in a procedure, we will provide that information at the appropriate stage. This Policy does not represent membership of a particular ombudsman, regulatory approval or participation in a scheme that has not been established.",
+        ],
+      },
+      {
+        heading: "Complaint records",
+        blocks: [
+          "We use complaint information to investigate, communicate the outcome, identify relevant service problems and meet legal obligations. Retention and disclosure are governed by our Privacy Policy. Access is limited according to the purpose of the review.",
         ],
       },
     ],
