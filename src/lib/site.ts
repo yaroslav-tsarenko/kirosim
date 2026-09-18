@@ -8,7 +8,7 @@ const countriesCovered = `${Math.floor(countries.length / 10) * 10}+`;
 const company = "BRIGHTCORE ENTERTAINMENT LTD";
 const regNumber = "17357935";
 const address = "Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH";
-const supportEmail = process.env.NEXT_PUBLIC_COMPANY_EMAIL ?? "support@kirosim.com";
+const supportEmail = "info@kirosim.com";
 
 export const site = {
   name: "Kirosim",
