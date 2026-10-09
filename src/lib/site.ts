@@ -5,9 +5,9 @@ import { countries } from "@/lib/data/countries";
 const countriesCovered = `${Math.floor(countries.length / 10) * 10}+`;
 
 /** Company registration details for the registered legal entity. */
-const company = "BRIGHTCORE ENTERTAINMENT LTD";
-const regNumber = "17357935";
-const address = "Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH";
+const company = "DOMESTIC DREAMS LIMITED";
+const regNumber = "15925893";
+const address = "11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF";
 const supportEmail = "info@kirosim.com";
 
 export const site = {
@@ -19,7 +19,7 @@ export const site = {
   tagline: "Plastic-free since day one",
   description: `Kirosim sells travel eSIMs for ${countriesCovered} countries. Pick your destination, get a QR code instantly, install in one minute — no roaming fees, no physical SIM.`,
   url: "https://kirosim.com",
-  homeCity: "London",
+  homeCity: "Bridgend",
   supportEmail,
   countriesCovered,
 } as const;
