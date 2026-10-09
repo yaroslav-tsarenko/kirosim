@@ -6,9 +6,9 @@ prepared_on: "2026-09-17"
 status: "Complete editorial draft; operational verification required before publication"
 brand: Kirosim
 website: "https://kirosim.com"
-legal_entity: BRIGHTCORE ENTERTAINMENT LTD
-company_number: "17357935"
-registered_office: "Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH"
+legal_entity: DOMESTIC DREAMS LIMITED
+company_number: "15925893"
+registered_office: "11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF"
 contact_email: "info@kirosim.com"
 policy_count: 7
 ---
@@ -41,7 +41,7 @@ Public cross-references use the intended production domain. The preparation date
 
 ### 1. About Kirosim and these Terms
 
-Kirosim is operated by **BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, with its registered office at **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. In these Terms, “Kirosim”, “we”, “us” and “our” mean that company. Contact us at **info@kirosim.com**.
+Kirosim is operated by **DOMESTIC DREAMS LIMITED**, company number **15925893**, with its registered office at **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. In these Terms, “Kirosim”, “we”, “us” and “our” mean that company. Contact us at **info@kirosim.com**.
 
 These Terms govern purchases through **kirosim.com** and use of our travel eSIM services. An “eSIM” is a digital SIM profile installed on a compatible device. A “Plan” is the package of mobile connectivity purchased for that profile, with the destinations, allowance, duration and features specified before payment. A “Top-up” is an additional package purchased for an eligible eSIM.
 
@@ -111,7 +111,7 @@ If a material pricing or description error is discovered, we will explain it and
 
 We accept **Visa and Mastercard**. Purchases are available in **EUR, GBP and USD**. The checkout identifies the currency and total amount payable before you commit to payment. Any applicable mandatory charge must be included or clearly disclosed before the order is placed.
 
-BRIGHTCORE ENTERTAINMENT LTD is not currently VAT-registered. This statement does not represent that every cross-border transaction is exempt from all applicable taxes. Any tax legally chargeable on your order will be handled as required by law and reflected in the amount disclosed before payment.
+DOMESTIC DREAMS LIMITED is not currently VAT-registered. This statement does not represent that every cross-border transaction is exempt from all applicable taxes. Any tax legally chargeable on your order will be handled as required by law and reflected in the amount disclosed before payment.
 
 Your card issuer may apply currency conversion or other charges under its agreement with you. Those charges are separate from our displayed price. We do not control the issuer's exchange rate.
 
@@ -204,9 +204,9 @@ These Terms and the information incorporated into your purchase form the agreeme
 
 ### 1. Who is responsible for your information
 
-**BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim**, is responsible as controller for the personal information it processes in operating **kirosim.com**, administering customer relationships and handling purchases and enquiries.
+**DOMESTIC DREAMS LIMITED**, company number **15925893**, trading as **Kirosim**, is responsible as controller for the personal information it processes in operating **kirosim.com**, administering customer relationships and handling purchases and enquiries.
 
-Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. For privacy questions or requests, contact **info@kirosim.com** and indicate that your message concerns privacy.
+Our registered office is **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. For privacy questions or requests, contact **info@kirosim.com** and indicate that your message concerns privacy.
 
 Connectivity and payment organisations may also process information for their own legal and operational purposes. Their role depends on the activity: not every organisation involved acts solely on our instructions.
 
@@ -334,7 +334,7 @@ We may update this Policy to reflect changes in our activities or legal requirem
 
 ### 1. About this Policy
 
-This Policy explains cookies and similar technologies used in connection with **kirosim.com**, operated by **BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, at **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Contact **info@kirosim.com** with questions.
+This Policy explains cookies and similar technologies used in connection with **kirosim.com**, operated by **DOMESTIC DREAMS LIMITED**, company number **15925893**, at **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. Contact **info@kirosim.com** with questions.
 
 Read this Policy together with our [Privacy Policy](https://kirosim.com/legal/privacy), which explains the handling of personal information, recipients, international processing and your rights.
 
@@ -392,7 +392,7 @@ We will update this Policy and the technology details when relevant changes occu
 
 ### 1. Scope and contact
 
-This Policy applies to purchases made directly from **BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim** at **kirosim.com**. Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Send cancellation and refund requests to **info@kirosim.com**.
+This Policy applies to purchases made directly from **DOMESTIC DREAMS LIMITED**, company number **15925893**, trading as **Kirosim** at **kirosim.com**. Our registered office is **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. Send cancellation and refund requests to **info@kirosim.com**.
 
 This Policy distinguishes our commercial change-of-mind offer from mandatory legal rights. Nothing here limits remedies for a service that is undelivered, defective, misdescribed or otherwise not supplied as required by law.
 
@@ -476,7 +476,7 @@ Email **info@kirosim.com** with a clear statement that you wish to cancel and en
 
 **Optional cancellation form**
 
-To: BRIGHTCORE ENTERTAINMENT LTD, Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH; info@kirosim.com.
+To: DOMESTIC DREAMS LIMITED, 11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF; info@kirosim.com.
 
 I/We hereby give notice that I/We cancel my/our contract for the following service:
 
@@ -506,7 +506,7 @@ If you disagree with an outcome, reply to our decision or email **info@kirosim.c
 
 ### 1. Electronic delivery
 
-**BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim**, supplies travel eSIMs electronically through **kirosim.com**. Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Delivery and installation enquiries should be sent to **info@kirosim.com**.
+**DOMESTIC DREAMS LIMITED**, company number **15925893**, trading as **Kirosim**, supplies travel eSIMs electronically through **kirosim.com**. Our registered office is **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. Delivery and installation enquiries should be sent to **info@kirosim.com**.
 
 No physical SIM, parcel or postal delivery is included. Following successful payment and order processing, your installation credentials and instructions are made available through the order or account interface and sent to the email address provided for the order.
 
@@ -577,7 +577,7 @@ Delivery, installation and service availability are distinct stages. Receiving a
 
 ### 1. Scope
 
-This Policy applies to Kirosim accounts, eSIMs and Plans supplied by **BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, at **kirosim.com**. Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Contact **info@kirosim.com** about an issue or restriction.
+This Policy applies to Kirosim accounts, eSIMs and Plans supplied by **DOMESTIC DREAMS LIMITED**, company number **15925893**, at **kirosim.com**. Our registered office is **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. Contact **info@kirosim.com** about an issue or restriction.
 
 Read this Policy with the [Terms & Conditions](https://kirosim.com/legal/terms) and the description of your Plan. It distinguishes prohibited conduct from technical limits attached to a particular package.
 
@@ -649,9 +649,9 @@ Report a compromised account, exposed QR code or suspected misuse promptly. Do n
 
 ### 1. Who handles complaints
 
-**BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim**, handles complaints about purchases and services at **kirosim.com**.
+**DOMESTIC DREAMS LIMITED**, company number **15925893**, trading as **Kirosim**, handles complaints about purchases and services at **kirosim.com**.
 
-Contact us at **info@kirosim.com** or write to **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. You do not need to use a particular form or pay a fee to complain.
+Contact us at **info@kirosim.com** or write to **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. You do not need to use a particular form or pay a fee to complain.
 
 ### 2. What to include
 
@@ -715,9 +715,9 @@ The following facts were supplied or expressly confirmed by the project owner:
 | Field | Confirmed value |
 | --- | --- |
 | Brand | Kirosim |
-| Sole seller | BRIGHTCORE ENTERTAINMENT LTD |
-| Company number | 17357935 |
-| Registered office | Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH |
+| Sole seller | DOMESTIC DREAMS LIMITED |
+| Company number | 15925893 |
+| Registered office | 11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF |
 | Production domain | kirosim.com |
 | Customer and privacy contact | info@kirosim.com |
 | VAT status | Not VAT-registered; this does not establish worldwide tax exemption |

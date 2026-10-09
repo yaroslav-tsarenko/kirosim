@@ -37,12 +37,12 @@ export const policies: Policy[] = [
     shortTitle: "Terms",
     lastUpdated: LAST_UPDATED,
     summary:
-      "The contract governing purchases through kirosim.com and use of the travel eSIM services sold by BRIGHTCORE ENTERTAINMENT LTD.",
+      "The contract governing purchases through kirosim.com and use of the travel eSIM services sold by DOMESTIC DREAMS LIMITED.",
     sections: [
       {
         heading: "About Kirosim and these Terms",
         blocks: [
-          "Kirosim is operated by **BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, with its registered office at **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. In these Terms, “Kirosim”, “we”, “us” and “our” mean that company. Contact us at **info@kirosim.com**.",
+          "Kirosim is operated by **DOMESTIC DREAMS LIMITED**, company number **15925893**, with its registered office at **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. In these Terms, “Kirosim”, “we”, “us” and “our” mean that company. Contact us at **info@kirosim.com**.",
           "These Terms govern purchases through **kirosim.com** and use of our travel eSIM services. An “eSIM” is a digital SIM profile installed on a compatible device. A “Plan” is the package of mobile connectivity purchased for that profile, with the destinations, allowance, duration and features specified before payment. A “Top-up” is an additional package purchased for an eligible eSIM.",
           "Our [Refund & Cancellation Policy](https://kirosim.com/legal/refund-cancellation), [Digital Delivery & Activation Policy](https://kirosim.com/legal/delivery-activation) and [Acceptable Use & Fair Usage Policy](https://kirosim.com/legal/acceptable-use) form part of your purchase agreement. Our [Privacy Policy](https://kirosim.com/legal/privacy) and [Cookie Policy](https://kirosim.com/legal/cookies) explain how information is handled; accepting these Terms is not consent to optional marketing or tracking.",
           "Read the Plan description and applicable policies before paying. Mandatory consumer rights prevail over these Terms. Subject to those rights, specific Plan details disclosed and agreed before payment prevail over general descriptions where they address the same feature. This does not allow a Plan description to remove the refund protection expressly offered in our Refund & Cancellation Policy.",
@@ -110,7 +110,7 @@ export const policies: Policy[] = [
         heading: "Prices and payment",
         blocks: [
           "We accept **Visa and Mastercard**. Purchases are available in **EUR, GBP and USD**. The checkout identifies the currency and total amount payable before you commit to payment. Any applicable mandatory charge must be included or clearly disclosed before the order is placed.",
-          "BRIGHTCORE ENTERTAINMENT LTD is not currently VAT-registered. This statement does not represent that every cross-border transaction is exempt from all applicable taxes. Any tax legally chargeable on your order will be handled as required by law and reflected in the amount disclosed before payment.",
+          "DOMESTIC DREAMS LIMITED is not currently VAT-registered. This statement does not represent that every cross-border transaction is exempt from all applicable taxes. Any tax legally chargeable on your order will be handled as required by law and reflected in the amount disclosed before payment.",
           "Your card issuer may apply currency conversion or other charges under its agreement with you. Those charges are separate from our displayed price. We do not control the issuer's exchange rate.",
           "Payment must be successfully completed before fulfilment. A temporary card authorisation is not necessarily a completed charge. Contact us if you believe you have been charged twice or charged an incorrect amount.",
           "Plans are prepaid, one-off purchases. They do not automatically renew. A Top-up requires a separate purchase and is available only where offered for the relevant eSIM. We will not charge you for additional allowances without your authorisation.",
@@ -197,13 +197,13 @@ export const policies: Policy[] = [
     shortTitle: "Privacy",
     lastUpdated: LAST_UPDATED,
     summary:
-      "What personal information BRIGHTCORE ENTERTAINMENT LTD processes, why, the legal bases, sharing, retention and your rights.",
+      "What personal information DOMESTIC DREAMS LIMITED processes, why, the legal bases, sharing, retention and your rights.",
     sections: [
       {
         heading: "Who is responsible for your information",
         blocks: [
-          "**BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim**, is responsible as controller for the personal information it processes in operating **kirosim.com**, administering customer relationships and handling purchases and enquiries.",
-          "Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. For privacy questions or requests, contact **info@kirosim.com** and indicate that your message concerns privacy.",
+          "**DOMESTIC DREAMS LIMITED**, company number **15925893**, trading as **Kirosim**, is responsible as controller for the personal information it processes in operating **kirosim.com**, administering customer relationships and handling purchases and enquiries.",
+          "Our registered office is **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. For privacy questions or requests, contact **info@kirosim.com** and indicate that your message concerns privacy.",
           "Connectivity and payment organisations may also process information for their own legal and operational purposes. Their role depends on the activity: not every organisation involved acts solely on our instructions.",
         ],
       },
@@ -378,7 +378,7 @@ export const policies: Policy[] = [
       {
         heading: "About this Policy",
         blocks: [
-          "This Policy explains cookies and similar technologies used in connection with **kirosim.com**, operated by **BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, at **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Contact **info@kirosim.com** with questions.",
+          "This Policy explains cookies and similar technologies used in connection with **kirosim.com**, operated by **DOMESTIC DREAMS LIMITED**, company number **15925893**, at **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. Contact **info@kirosim.com** with questions.",
           "Read this Policy together with our [Privacy Policy](https://kirosim.com/legal/privacy), which explains the handling of personal information, recipients, international processing and your rights.",
         ],
       },
@@ -464,7 +464,7 @@ export const policies: Policy[] = [
       {
         heading: "Scope and contact",
         blocks: [
-          "This Policy applies to purchases made directly from **BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim** at **kirosim.com**. Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Send cancellation and refund requests to **info@kirosim.com**.",
+          "This Policy applies to purchases made directly from **DOMESTIC DREAMS LIMITED**, company number **15925893**, trading as **Kirosim** at **kirosim.com**. Our registered office is **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. Send cancellation and refund requests to **info@kirosim.com**.",
           "This Policy distinguishes our commercial change-of-mind offer from mandatory legal rights. Nothing here limits remedies for a service that is undelivered, defective, misdescribed or otherwise not supplied as required by law.",
         ],
       },
@@ -545,7 +545,7 @@ export const policies: Policy[] = [
         blocks: [
           "Email **info@kirosim.com** with a clear statement that you wish to cancel and enough information to identify the purchase. You may use the optional form below, but using it is not a condition of cancellation. Where a statutory deadline applies, sending a clear notice before it expires is sufficient; our later response does not make the notice late.",
           "**Optional cancellation form**",
-          "To: BRIGHTCORE ENTERTAINMENT LTD, Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH; info@kirosim.com.",
+          "To: DOMESTIC DREAMS LIMITED, 11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF; info@kirosim.com.",
           "I/We hereby give notice that I/We cancel my/our contract for the following service:",
           {
             list: [
@@ -581,7 +581,7 @@ export const policies: Policy[] = [
       {
         heading: "Electronic delivery",
         blocks: [
-          "**BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim**, supplies travel eSIMs electronically through **kirosim.com**. Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Delivery and installation enquiries should be sent to **info@kirosim.com**.",
+          "**DOMESTIC DREAMS LIMITED**, company number **15925893**, trading as **Kirosim**, supplies travel eSIMs electronically through **kirosim.com**. Our registered office is **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. Delivery and installation enquiries should be sent to **info@kirosim.com**.",
           "No physical SIM, parcel or postal delivery is included. Following successful payment and order processing, your installation credentials and instructions are made available through the order or account interface and sent to the email address provided for the order.",
         ],
       },
@@ -658,7 +658,7 @@ export const policies: Policy[] = [
       {
         heading: "Scope",
         blocks: [
-          "This Policy applies to Kirosim accounts, eSIMs and Plans supplied by **BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, at **kirosim.com**. Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Contact **info@kirosim.com** about an issue or restriction.",
+          "This Policy applies to Kirosim accounts, eSIMs and Plans supplied by **DOMESTIC DREAMS LIMITED**, company number **15925893**, at **kirosim.com**. Our registered office is **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. Contact **info@kirosim.com** about an issue or restriction.",
           "Read this Policy with the [Terms & Conditions](https://kirosim.com/legal/terms) and the description of your Plan. It distinguishes prohibited conduct from technical limits attached to a particular package.",
         ],
       },
@@ -734,13 +734,13 @@ export const policies: Policy[] = [
     shortTitle: "Complaints",
     lastUpdated: LAST_UPDATED,
     summary:
-      "How to raise a complaint with BRIGHTCORE ENTERTAINMENT LTD, how it is investigated, time limits, and independent routes available to you.",
+      "How to raise a complaint with DOMESTIC DREAMS LIMITED, how it is investigated, time limits, and independent routes available to you.",
     sections: [
       {
         heading: "Who handles complaints",
         blocks: [
-          "**BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim**, handles complaints about purchases and services at **kirosim.com**.",
-          "Contact us at **info@kirosim.com** or write to **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. You do not need to use a particular form or pay a fee to complain.",
+          "**DOMESTIC DREAMS LIMITED**, company number **15925893**, trading as **Kirosim**, handles complaints about purchases and services at **kirosim.com**.",
+          "Contact us at **info@kirosim.com** or write to **11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF**. You do not need to use a particular form or pay a fee to complain.",
         ],
       },
       {
