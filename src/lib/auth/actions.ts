@@ -7,9 +7,17 @@ import { sql, ensureSchema, hasDatabase } from "./db";
 import { hashPassword, verifyPassword } from "./password";
 import { createSession, destroySession, readSession } from "./session";
 import { getUserByEmail } from "./dal";
-import { registerSchema, loginSchema, forgotSchema, resetSchema } from "./schema";
+import { registerSchema, loginSchema, forgotSchema, resetSchema, topUpSchema } from "./schema";
 import { sendMail, welcomeEmail, welcomeBackEmail, resetEmail, topUpEmail } from "./mailer";
 import { generateTopUpPdf } from "./invoice";
+import {
+  toBaseCents,
+  formatAmount,
+  minTopUp,
+  maxTopUp,
+  MIN_TOPUP_CENTS,
+  MAX_TOPUP_CENTS,
+} from "@/lib/utils";
 
 export interface FormState {
   ok?: boolean;
@@ -143,11 +151,18 @@ export async function topUpAction(_prev: FormState, data: FormData): Promise<For
   const session = await readSession();
   if (!session) return { message: "Please sign in first." };
 
-  const amount = Number(data.get("amount"));
-  if (!Number.isFinite(amount) || amount <= 0 || amount > 1000) {
-    return { message: "Enter an amount between 1 and 1000." };
+  const parsed = topUpSchema.safeParse(Object.fromEntries(data));
+  if (!parsed.success) {
+    return { message: "Enter an amount to top up." };
   }
-  const cents = Math.round(amount * 100);
+  const { amount, currency } = parsed.data;
+
+  const cents = toBaseCents(amount, currency);
+  if (cents < MIN_TOPUP_CENTS || cents > MAX_TOPUP_CENTS) {
+    return {
+      message: `Top up between ${formatAmount(minTopUp(currency), currency)} and ${formatAmount(maxTopUp(currency), currency)}.`,
+    };
+  }
 
   await ensureSchema();
   const rows = await sql()`

@@ -12,7 +12,14 @@ import { topUpAction, logoutAction, type FormState } from "@/lib/auth/actions";
 import type { User, Transaction, EsimRecord } from "@/lib/auth/types";
 import { usePreferences } from "@/components/providers/Preferences";
 import { Bolt } from "@/components/ui/icons";
-import { cn, formatCents } from "@/lib/utils";
+import {
+  cn,
+  formatAmount,
+  formatCents,
+  currencySymbol,
+  minTopUp,
+  maxTopUp,
+} from "@/lib/utils";
 
 export type Tab = "esims" | "wallet" | "saved" | "profile";
 
@@ -83,6 +90,8 @@ export function AccountView({
 function WalletPanel({ user, transactions }: { user: User; transactions: Transaction[] }) {
   const [state, formAction, pending] = useActionState<FormState, FormData>(topUpAction, {});
   const { currency } = usePreferences();
+  const min = minTopUp(currency);
+  const max = maxTopUp(currency);
 
   return (
     <div className="grid gap-4 lg:grid-cols-2">
@@ -105,31 +114,28 @@ function WalletPanel({ user, transactions }: { user: User; transactions: Transac
                 {state.message}
               </p>
             ) : null}
-            <div className="flex flex-wrap gap-2">
-              {[10, 25, 50].map((amt) => (
-                <button
-                  key={amt}
-                  type="submit"
-                  name="amount"
-                  value={amt}
-                  disabled={pending}
-                  className="inline-flex h-10 items-center rounded-xs border border-hairline-strong px-4 font-mono text-sm font-semibold text-ink transition-colors hover:border-lime hover:text-lime disabled:opacity-50"
-                >
-                  +${amt}
-                </button>
-              ))}
-            </div>
+            <input type="hidden" name="currency" value={currency} />
             <div className="flex gap-2">
-              <input
-                type="number"
-                name="amount"
-                min={1}
-                max={1000}
-                step="0.01"
-                placeholder="Custom amount"
-                aria-label="Custom top-up amount"
-                className="field h-12 px-3.5 text-sm focus:border-lime focus:outline-none"
-              />
+              <div className="relative flex-1">
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-mono text-sm text-ink-muted"
+                >
+                  {currencySymbol(currency)}
+                </span>
+                <input
+                  type="number"
+                  name="amount"
+                  min={min}
+                  max={max}
+                  step="0.01"
+                  required
+                  placeholder={min.toFixed(2)}
+                  aria-label={`Top-up amount in ${currency}`}
+                  aria-describedby="topup-range"
+                  className="field h-12 w-full pl-7 pr-3.5 text-sm focus:border-lime focus:outline-none"
+                />
+              </div>
               <button
                 type="submit"
                 disabled={pending}
@@ -138,6 +144,9 @@ function WalletPanel({ user, transactions }: { user: User; transactions: Transac
                 <Bolt className="size-4" /> {pending ? "…" : "Top up"}
               </button>
             </div>
+            <p id="topup-range" className="readout normal-case tracking-normal">
+              Any amount from {formatAmount(min, currency)} to {formatAmount(max, currency)}.
+            </p>
           </form>
         </div>
       </div>
