@@ -25,7 +25,7 @@ function getTransporter(): Transporter | null {
   const pass = process.env.SMTP_PASS;
   if (!host || !user || !pass) return null;
   if (!transporter) {
-    const port = Number(process.env.SMTP_PORT ?? 465);
+    const port = Number(process.env.SMTP_PORT ?? 587);
     transporter = nodemailer.createTransport({
       host,
       port,
