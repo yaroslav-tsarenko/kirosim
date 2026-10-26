@@ -6,13 +6,24 @@ import { DestinationSearch } from "@/components/search/DestinationSearch";
 import { Logo } from "./Logo";
 import { CurrencySelect } from "./PrefSelects";
 import { ThemeToggle } from "./ThemeToggle";
+import { usePreferences } from "@/components/providers/Preferences";
 import { nav } from "@/lib/site";
 import { regions } from "@/lib/data/regions";
 import { popularCountries } from "@/lib/data/countries";
 import { ChevronDown, Close } from "@/components/ui/icons";
-import { cn } from "@/lib/utils";
+import { cn, formatCents } from "@/lib/utils";
+import type { AccountSummary } from "./Header";
 
-export function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function MobileDrawer({
+  open,
+  onClose,
+  account,
+}: {
+  open: boolean;
+  onClose: () => void;
+  account: AccountSummary | null;
+}) {
+  const { currency } = usePreferences();
   useEffect(() => {
     if (open) {
       const prev = document.body.style.overflow;
@@ -63,6 +74,17 @@ export function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => 
           <div className="p-4">
             <DestinationSearch placeholder="Where are you headed?" />
           </div>
+
+          <Link
+            href={account ? "/account?tab=wallet" : "/login"}
+            className="flex items-center gap-3 border-t border-hairline px-4 py-3.5 transition-colors hover:bg-lime-tint"
+          >
+            <span className="readout">Balance</span>
+            <span className="font-display text-lg font-bold tabular-nums text-ink">
+              {formatCents(account?.balanceCents ?? 0, currency)}
+            </span>
+            <span className="ml-auto text-sm font-medium text-signal">Top up</span>
+          </Link>
 
           <nav aria-label="Mobile primary" className="border-t border-hairline">
             <ul>

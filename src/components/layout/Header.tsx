@@ -74,18 +74,21 @@ export function Header({ account }: { account: AccountSummary | null }) {
           </div>
 
           <div className="ml-auto flex items-center gap-0.5">
-            {account ? (
-              <Link
-                href="/account?tab=wallet"
-                className="mr-2 hidden items-center gap-2 border border-hairline px-2.5 py-1.5 transition-colors hover:border-ink sm:inline-flex"
-                title="Balance"
-              >
-                <span className="readout text-[0.6rem]">Balance</span>
-                <span className="font-display text-sm font-bold tabular-nums text-ink">
-                  {formatCents(account.balanceCents, currency)}
-                </span>
-              </Link>
-            ) : null}
+            {/* Shown signed out too, at zero, so the wallet is visible as a
+                feature rather than something only members discover. */}
+            <Link
+              href={account ? "/account?tab=wallet" : "/login"}
+              className="mr-2 hidden items-center gap-2 border border-hairline px-2.5 py-1.5 transition-colors hover:border-ink sm:inline-flex"
+              title={account ? "Balance" : "Sign in to top up your balance"}
+            >
+              <span className="readout text-[0.6rem]">Balance</span>
+              <span className="font-display text-sm font-bold tabular-nums text-ink">
+                {formatCents(account?.balanceCents ?? 0, currency)}
+              </span>
+              <span className="border-l border-hairline pl-2 text-xs font-medium text-signal">
+                Top up
+              </span>
+            </Link>
             <AccountButton account={account} />
             <IconLink
               href="/account?tab=saved"
@@ -162,7 +165,7 @@ export function Header({ account }: { account: AccountSummary | null }) {
         {megaOpen ? <MegaNav onClose={() => setMegaOpen(false)} /> : null}
       </div>
 
-      <MobileDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <MobileDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} account={account} />
     </header>
   );
 }

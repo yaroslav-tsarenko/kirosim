@@ -57,7 +57,7 @@ Copy `.env.example` to `.env.local` and fill in:
 
 | Variable | Purpose |
 | --- | --- |
-| `DATABASE_URL` | Neon Postgres connection string |
+| `DATABASE_URL` | Neon Postgres connection string (`DATABASE_URL_KIROSIM` is also accepted) |
 | `SESSION_SECRET` | Session signing key |
 | `APP_URL` | Public origin, used in emails and reset links |
 | `SMTP_*`, `MAIL_FROM` | Transactional email; unset means emails log to the console |
