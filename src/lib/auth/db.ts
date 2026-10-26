@@ -4,8 +4,17 @@ import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 let cached: NeonQueryFunction<false, false> | null = null;
 let schemaReady: Promise<void> | null = null;
 
+/**
+ * The connection string. `DATABASE_URL_KIROSIM` is accepted as well because a
+ * Vercel Postgres/Neon integration names the variable after its store, and a
+ * connection string that is present under that name is still the database.
+ */
+function databaseUrl(): string | undefined {
+  return process.env.DATABASE_URL || process.env.DATABASE_URL_KIROSIM;
+}
+
 export function hasDatabase(): boolean {
-  return Boolean(process.env.DATABASE_URL);
+  return Boolean(databaseUrl());
 }
 
 /**
@@ -15,10 +24,10 @@ export function hasDatabase(): boolean {
  * set DATABASE_URL to enable persistence.
  */
 export function sql(): NeonQueryFunction<false, false> {
-  const url = process.env.DATABASE_URL;
+  const url = databaseUrl();
   if (!url) {
     throw new Error(
-      "DATABASE_URL is not set. Provision a Postgres database (Neon via the Vercel Marketplace) and add DATABASE_URL to your environment.",
+      "DATABASE_URL is not set. Provision a Postgres database (Neon via the Vercel Marketplace) and add DATABASE_URL (or DATABASE_URL_KIROSIM) to your environment.",
     );
   }
   if (!cached) cached = neon(url);
@@ -30,7 +39,14 @@ export function sql(): NeonQueryFunction<false, false> {
  * concurrent requests during a cold start only run the DDL once.
  */
 export function ensureSchema(): Promise<void> {
-  if (!schemaReady) schemaReady = createSchema();
+  if (!schemaReady) {
+    // A rejection must not be cached: one failed cold-start DDL would
+    // otherwise be replayed to every later request on this instance.
+    schemaReady = createSchema().catch((err) => {
+      schemaReady = null;
+      throw err;
+    });
+  }
   return schemaReady;
 }
 

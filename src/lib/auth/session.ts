@@ -13,6 +13,17 @@ function secret(): Uint8Array {
   return new TextEncoder().encode(s);
 }
 
+/**
+ * Whether a session can actually be signed. Checked before an action writes
+ * anything, so a missing secret is reported rather than discovered half-way
+ * through — `secret()` throws, and a sign-up that throws after its INSERT
+ * leaves an account the visitor can neither use nor register again.
+ */
+export function hasSessionSecret(): boolean {
+  const s = process.env.SESSION_SECRET;
+  return Boolean(s && s.length >= 16);
+}
+
 export interface SessionPayload {
   userId: number;
 }

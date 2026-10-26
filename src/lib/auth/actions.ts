@@ -5,7 +5,7 @@ import { randomBytes, createHash } from "node:crypto";
 import { z } from "zod";
 import { sql, ensureSchema, hasDatabase } from "./db";
 import { hashPassword, verifyPassword } from "./password";
-import { createSession, destroySession, readSession } from "./session";
+import { createSession, destroySession, readSession, hasSessionSecret } from "./session";
 import { getUserByEmail } from "./dal";
 import { registerSchema, loginSchema, forgotSchema, resetSchema, topUpSchema } from "./schema";
 import { sendMail, welcomeEmail, welcomeBackEmail, resetEmail, topUpEmail } from "./mailer";
@@ -43,48 +43,85 @@ const NO_DB: FormState = {
   message: "The database is not configured yet. Set DATABASE_URL to enable accounts.",
 };
 
+const NO_SESSION_SECRET: FormState = {
+  message:
+    "Accounts are not configured yet. Set SESSION_SECRET (at least 16 characters) to enable sign-in.",
+};
+
+/** Shown when the database is reachable in principle but the write failed. */
+const DB_FAILED = "We couldn't complete that right now. Please try again.";
+
 export async function registerAction(_prev: FormState, data: FormData): Promise<FormState> {
   if (!hasDatabase()) return NO_DB;
+  if (!hasSessionSecret()) return NO_SESSION_SECRET;
   const parsed = registerSchema.safeParse(Object.fromEntries(data));
   if (!parsed.success) {
     return { errors: fieldErrors(parsed.error), values: keep(data, [...data.keys()]) };
   }
   const v = parsed.data;
 
-  const existing = await getUserByEmail(v.email);
-  if (existing) {
-    return { errors: { email: ["An account with this email already exists"] }, values: keep(data, [...data.keys()]) };
+  let userId: number;
+  try {
+    const existing = await getUserByEmail(v.email);
+    if (existing) {
+      return { errors: { email: ["An account with this email already exists"] }, values: keep(data, [...data.keys()]) };
+    }
+
+    const passwordHash = await hashPassword(v.password);
+    const rows = await sql()`
+      INSERT INTO users (email, password_hash, first_name, last_name, phone, dob, street, city, country, postal_code)
+      VALUES (${v.email}, ${passwordHash}, ${v.firstName}, ${v.lastName}, ${v.phone}, ${v.dob}, ${v.street}, ${v.city}, ${v.country}, ${v.postalCode})
+      RETURNING id
+    `;
+    userId = Number(rows[0].id);
+  } catch (err) {
+    console.error("[register] could not create the account:", err);
+    return { message: DB_FAILED, values: keep(data, [...data.keys()]) };
   }
 
-  const passwordHash = await hashPassword(v.password);
-  const rows = await sql()`
-    INSERT INTO users (email, password_hash, first_name, last_name, phone, dob, street, city, country, postal_code)
-    VALUES (${v.email}, ${passwordHash}, ${v.firstName}, ${v.lastName}, ${v.phone}, ${v.dob}, ${v.street}, ${v.city}, ${v.country}, ${v.postalCode})
-    RETURNING id
-  `;
-  const userId = Number(rows[0].id);
+  // Signing in is what makes the account usable. If it fails the row has to
+  // go: left behind, it is an account nobody is signed into whose email then
+  // answers "already exists" on every retry.
+  try {
+    await createSession(userId);
+  } catch (err) {
+    console.error("[register] session creation failed, rolling back the account:", err);
+    try {
+      await sql()`DELETE FROM users WHERE id = ${userId}`;
+    } catch (cleanupErr) {
+      console.error("[register] rollback failed — orphan account", userId, cleanupErr);
+    }
+    return { message: DB_FAILED, values: keep(data, [...data.keys()]) };
+  }
 
+  // Secondary to the account itself, and sent only once it is real.
   await sendMail({ to: v.email, ...welcomeEmail(v.firstName) });
-  await createSession(userId);
   redirect("/account");
 }
 
 export async function loginAction(_prev: FormState, data: FormData): Promise<FormState> {
   if (!hasDatabase()) return NO_DB;
+  if (!hasSessionSecret()) return NO_SESSION_SECRET;
   const parsed = loginSchema.safeParse(Object.fromEntries(data));
   if (!parsed.success) {
     return { errors: fieldErrors(parsed.error), values: keep(data, ["email"]) };
   }
   const { email, password } = parsed.data;
 
-  const user = await getUserByEmail(email);
-  const valid = user && (await verifyPassword(password, user.password_hash));
-  if (!valid) {
-    return { message: "Invalid email or password", values: { email } };
+  let user: Awaited<ReturnType<typeof getUserByEmail>>;
+  try {
+    user = await getUserByEmail(email);
+    const valid = user && (await verifyPassword(password, user.password_hash));
+    if (!valid) {
+      return { message: "Invalid email or password", values: { email } };
+    }
+    await createSession(Number(user.id));
+  } catch (err) {
+    console.error("[login] could not sign the visitor in:", err);
+    return { message: DB_FAILED, values: { email } };
   }
 
   await sendMail({ to: email, ...welcomeBackEmail(user.first_name) });
-  await createSession(Number(user.id));
   redirect("/account");
 }
 
@@ -121,6 +158,7 @@ export async function requestPasswordResetAction(_prev: FormState, data: FormDat
 
 export async function resetPasswordAction(_prev: FormState, data: FormData): Promise<FormState> {
   if (!hasDatabase()) return NO_DB;
+  if (!hasSessionSecret()) return NO_SESSION_SECRET;
   const parsed = resetSchema.safeParse(Object.fromEntries(data));
   if (!parsed.success) {
     return { errors: fieldErrors(parsed.error), values: { token: String(data.get("token") ?? "") } };
