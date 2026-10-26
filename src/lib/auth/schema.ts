@@ -53,4 +53,14 @@ export const resetSchema = z
     path: ["confirmPassword"],
   });
 
+/**
+ * A wallet top-up. The amount is typed in whatever currency the visitor is
+ * browsing in, so the code travels with it and the server — not the client —
+ * converts to the USD base and checks the bounds.
+ */
+export const topUpSchema = z.object({
+  amount: z.coerce.number("Enter an amount").positive("Enter an amount"),
+  currency: z.enum(["USD", "EUR", "GBP"]).catch("USD"),
+});
+
 export type RegisterInput = z.infer<typeof registerSchema>;
