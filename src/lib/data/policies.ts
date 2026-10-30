@@ -1,8 +1,9 @@
 /** Customer-facing legal policies, transcribed from the master text in
- *  addons/kirosim-policies.md. Only the content between each
- *  PUBLIC_POLICY_START / PUBLIC_POLICY_END marker is included — the YAML
- *  front matter, document map and internal implementation appendix are marked
- *  "not customer-facing content" and are intentionally omitted. */
+ *  policies/kirosim-policies.md, with the delivery and retention revision in
+ *  policies/kirosim-policy-revisions-2026-10-30.md applied on top. Only the
+ *  content between the PUBLIC start/end markers is included — front matter,
+ *  document maps and internal implementation notes are not customer-facing
+ *  and are intentionally omitted. */
 
 /** A block of policy content. A plain string is a paragraph (supporting inline
  *  `**bold**` and `[label](url)` markup); objects render as a bullet list or a
@@ -29,13 +30,15 @@ export interface Policy {
 }
 
 const LAST_UPDATED = "17 September 2026";
+/** Delivery & retention revision (policies/kirosim-policy-revisions-2026-10-30.md). */
+const REVISED_DELIVERY_RETENTION = "30 October 2026";
 
 export const policies: Policy[] = [
   {
     slug: "terms",
     title: "Terms & Conditions",
     shortTitle: "Terms",
-    lastUpdated: LAST_UPDATED,
+    lastUpdated: REVISED_DELIVERY_RETENTION,
     summary:
       "The contract governing purchases through kirosim.com and use of the travel eSIM services sold by BRIGHTCORE ENTERTAINMENT LTD.",
     sections: [
@@ -119,11 +122,12 @@ export const policies: Policy[] = [
       {
         heading: "Delivery, installation and validity",
         blocks: [
-          "eSIMs are delivered electronically, with no physical SIM or postal shipment. Following successful payment and order processing, installation credentials and instructions are made available through the order or account interface and sent to the email address used for the purchase.",
-          "**The Plan's validity period begins when the eSIM is successfully installed. It does not wait for your arrival at the destination, first network connection or first data use.** Viewing a QR code or receiving an email is not installation.",
-          "Install only when you are ready for the validity period to begin. Once started, the period runs continuously and does not pause if you switch off your device, disable or delete the profile, leave the covered area or do not use the allowance.",
-          "Any deadline for installing a purchased eSIM must be disclosed before payment and in the order information. We will not retrospectively impose an undisclosed installation deadline on an existing purchase. Contact us before buying substantially in advance if the available installation window is unclear.",
-          "The [Digital Delivery & Activation Policy](https://kirosim.com/legal/delivery-activation) explains delivery problems, profile security, installation and Top-ups in more detail.",
+          "Our [Digital Delivery & Activation Policy](https://kirosim.com/legal/delivery-activation) forms part of these Terms and explains electronic fulfilment, availability, agreed delivery timeframes, delays, installation and Top-ups.",
+          "Before payment, we will display the selected Plan's availability and anticipated delivery date or timeframe. If it is unavailable for normal delivery, we will disclose that fact and require your express agreement to a specific revised delivery date or timeframe before taking payment. If we cannot provide a meaningful timeframe, the affected Plan will not be available for a paid order.",
+          "If the agreed delivery timeframe cannot be met after purchase, we will notify you without undue delay, explain the revised anticipated timeframe where one can be given, and offer you the choice to agree to wait or cancel the affected undelivered purchase for a full refund. Silence is not agreement to a revised timeframe. These rights are separate from the 14-day change-of-mind offer and are not lost merely because that period expires.",
+          "Delivery is electronic, through the order or account interface and email; no physical SIM is shipped. A payment receipt does not establish delivery of usable credentials.",
+          "**The Plan's validity begins when the eSIM is successfully installed. It does not wait for arrival at the destination, first network connection or first data use.** Viewing a QR code or receiving an email does not itself start validity.",
+          "Install only when you are ready for the validity period to run. Once started, it runs continuously and does not pause when the device is switched off, the profile is disabled or deleted, or you leave coverage. Any installation deadline must be disclosed before payment and in the order information; it will not be imposed retrospectively if it was not disclosed.",
         ],
       },
       {
@@ -195,7 +199,7 @@ export const policies: Policy[] = [
     slug: "privacy",
     title: "Privacy Policy",
     shortTitle: "Privacy",
-    lastUpdated: LAST_UPDATED,
+    lastUpdated: REVISED_DELIVERY_RETENTION,
     summary:
       "What personal information BRIGHTCORE ENTERTAINMENT LTD processes, why, the legal bases, sharing, retention and your rights.",
     sections: [
@@ -318,20 +322,27 @@ export const policies: Policy[] = [
         ],
       },
       {
-        heading: "Retention",
+        heading: "Data retention",
         blocks: [
-          "We retain identifiable information only for as long as needed for its purpose and applicable legal requirements. Retention is assessed by record type:",
+          "We determine retention separately for each category of information. A requirement to keep an accounting record does not justify keeping an entire customer account, support history or set of technical logs for the same period.",
+          "The following periods and criteria apply:",
           {
-            list: [
-              "account information is needed while the account is active and for a proportionate period to complete closure, address unresolved matters and prevent misuse;",
-              "order, payment and refund records are retained for applicable accounting, tax, dispute and legal-claim requirements;",
-              "service and diagnostic records are retained according to their necessity for Plan administration, fault investigation and related disputes;",
-              "support correspondence is retained according to the issue, its resolution and any continuing legal need;",
-              "consent and suppression records are retained as needed to evidence and respect your choices; and",
-              "security logs are retained according to the incident-detection and investigation need, with longer preservation where a specific incident or legal obligation justifies it.",
-            ],
+            table: {
+              head: ["Data category", "Retention period or specific criteria", "What happens when the period or purpose ends"],
+              rows: [
+                ["**Transaction and accounting records** — order references, invoices, amounts, currencies, payment and refund records, and information necessary to evidence the transaction", "Records required for company accounting and tax purposes are retained for **six years from the end of the last company financial year to which they relate**. A longer period applies where legally required, for example because a relevant tax return was filed late or an official tax enquiry remains open. Only information necessary for the accounting or legal purpose is included in that retention.", "The required records are deleted or irreversibly anonymised when the applicable period ends, unless a specific continuing legal requirement or documented hold applies. Unnecessary payment or customer details are not retained merely because the core transaction record must remain."],
+                ["**Account information** — profile details, login-related records and preferences", "Retained while the account remains open and the information is needed to provide the requested account functions. On closure, we identify any active Plan, outstanding payment, refund, complaint or ownership-verification matter that still needs particular account information. Those details are retained only until that matter is completed, unless another specific retention requirement applies.", "Information no longer needed for the account is deleted or anonymised. Necessary transaction records are retained separately under the accounting rule above; keeping them does not require maintaining an active login or the full account profile."],
+                ["**Support correspondence** — enquiries, complaint messages, attachments and diagnostic screenshots", "Routine enquiry records are retained until the enquiry has been answered and any requested follow-up has been completed. Order-related correspondence is retained until the underlying delivery, service, refund or complaint matter is resolved and any relevant open review is finished. Where particular messages are necessary evidence for an identifiable payment dispute or legal claim, that limited evidence may be retained for the applicable dispute or claim period. The relevant event is resolution of the enquiry or underlying matter, rather than continued use of the account.", "Redundant attachments and diagnostic material are removed when no longer needed. The whole support history is not kept simply because one message evidences a transaction or dispute. An unresolved legal matter justifies retaining only the records relevant to it."],
+                ["**Routine technical logs** — website access, error and performance records containing identifiers", "Retained only for the operational monitoring and troubleshooting window needed to detect and resolve the relevant technical issue. That window is assessed from the log's creation, taking account of the system's fault-detection cycle and the time needed to validate a correction. Continued account activity does not restart retention for old logs.", "Identifiable log entries are deleted or anonymised when their monitoring or diagnostic purpose ends. Long-term performance reporting uses anonymised aggregates where individual identification is unnecessary."],
+                ["**Security and incident logs** — authentication events, abuse alerts and records relevant to a suspected incident", "Routine security records are retained for the detection window appropriate to the risk concerned. Records linked to an identified incident are isolated and retained until investigation, remediation and any related complaint or legal process are completed. Continued retention must relate to the specific incident, not a general possibility of future misuse.", "Unrelated routine logs follow their normal deletion process. Incident evidence is deleted or anonymised when the documented reason for retaining it ends, subject to any specific legal hold."],
+                ["**eSIM and service records** — profile identifiers, installation status, validity and allowance information", "Retained while needed to provide the purchased Plan and resolve an associated delivery, usage, billing or service complaint. After the Plan and any related issue are concluded, only the information needed for an applicable transaction record or specific dispute is retained under the relevant rule above.", "Operational information no longer needed for the Plan is deleted or anonymised. The full technical history is not automatically retained for the accounting period."],
+                ["**Marketing choices and consent records**", "A marketing contact is retained for promotional use until consent is withdrawn or the subscription otherwise ends. Evidence of consent is retained only as needed to establish the lawfulness of the relevant activity. A minimal unsubscribe or suppression record may remain while necessary to prevent the address being added back to active marketing lists.", "Withdrawal stops promotional use. Keeping a suppression record does not permit further marketing. Unnecessary profile or campaign information is removed."],
+              ],
+            },
           },
-          "The relevant criteria include the length of the customer relationship, whether an issue remains open, applicable statutory periods and whether the purpose can be achieved with anonymised data. We do not keep all categories indefinitely simply because an account once existed. At the end of the applicable period, records should be deleted or irreversibly anonymised; backup copies are subject to controlled retention and restricted use.",
+          "**Specific holds and exceptions.** If a record is needed for an open dispute, official investigation or another legal obligation, we limit the hold to relevant information and document its reason. We review the continuing need when that matter is resolved or the obligation expires. We do not retain all personal information indefinitely “just in case”.",
+          "**Deletion and backups.** Deletion from active systems may precede removal from backups. Residual backup copies remain restricted and are removed through the applicable backup replacement cycle; they are not used to restart ordinary processing. If a backup is restored, applicable deletion decisions must be reapplied. Backup retention must not become an indefinite alternative archive.",
+          "**Questions and rights.** You may contact **info@kirosim.com** for the retention period or criteria applicable to a particular record and to exercise your data-protection rights. Where information must be retained despite a deletion request, we will explain the relevant reason and limit continued processing accordingly.",
         ],
       },
       {
@@ -457,7 +468,7 @@ export const policies: Policy[] = [
     slug: "refund-cancellation",
     title: "Refund & Cancellation Policy",
     shortTitle: "Refund Policy",
-    lastUpdated: LAST_UPDATED,
+    lastUpdated: REVISED_DELIVERY_RETENTION,
     summary:
       "How the 14-day change-of-mind offer works and the separate remedies for faulty, unavailable or undelivered eSIMs.",
     sections: [
@@ -489,12 +500,14 @@ export const policies: Policy[] = [
         ],
       },
       {
-        heading: "Undelivered, invalid or faulty eSIMs",
+        heading: "Delayed, undelivered, invalid or faulty eSIMs",
         blocks: [
-          "Contact us if installation credentials do not arrive, cannot be accessed, are invalid or fail to provide the purchased service. We will investigate and offer the remedy required by the circumstances and applicable law, which may include correcting fulfilment, restoring service, supplying an appropriate replacement or issuing a full or partial refund.",
-          "If we cannot supply the purchased service at all, a full refund will normally be due. If only part of the service was properly supplied, the appropriate remedy will take account of the affected portion, the seriousness of the failure and your legal rights. We will not assess every service-quality issue solely by whether some data was consumed.",
-          "Where the law gives you a choice of remedy, we will respect that choice. We will not require acceptance of store credit or a materially different Plan instead of a monetary refund to which you are entitled.",
-          "The 14-day change-of-mind period is not a deadline for reporting all faults or exercising all legal remedies.",
+          "If we cannot meet the delivery timeframe agreed before payment, we will notify you without undue delay, provide a revised anticipated delivery date or timeframe where reasonably possible, and offer you the choice to agree to wait or cancel the affected undelivered purchase for a full refund. We will not treat silence as agreement to delayed delivery or require you to accept an indefinite wait, substitute Plan or store credit.",
+          "You may cancel by replying to our notice or emailing **info@kirosim.com** with your order reference. If you do not agree to a revised arrangement and we cannot fulfil the original commitment, we will cancel the affected undelivered order and refund it. The [Digital Delivery & Activation Policy](https://kirosim.com/legal/delivery-activation) explains the notification and response process.",
+          "For a delivery-related cancellation, we will initiate a full refund for the affected undelivered item, including any mandatory charge attributable to it, without undue delay and no later than 14 calendar days after receiving your cancellation notice or after we cancel the order ourselves, as applicable. Any shorter mandatory deadline takes priority. This timeframe runs from cancellation, not from a later internal approval. No cancellation or administration fee applies.",
+          "Contact us also if credentials are missing, inaccessible, invalid or fail to provide the purchased service. We will investigate and provide the remedy required by the circumstances and applicable law, which may include correcting fulfilment, restoring service, supplying an appropriate replacement or issuing a full or partial refund.",
+          "If only part of the service was properly supplied, the appropriate remedy will take account of the affected portion, the seriousness of the failure and your legal rights. We will not assess every service-quality issue solely by whether some data was consumed. Where the law gives you a choice of remedy, we will respect it.",
+          "The 14-day commercial change-of-mind period is not a deadline for all delivery or fault claims. Installation, use or agreement to an earlier revised delivery date does not automatically remove a remedy for a subsequent failure to supply the service as agreed.",
         ],
       },
       {
@@ -536,6 +549,7 @@ export const policies: Policy[] = [
         blocks: [
           "Refunds are made to the original payment method unless you expressly agree otherwise or a legally permitted alternative is necessary because that method cannot receive the refund. You will not be required to accept credit in place of a refund legally due.",
           "For a valid statutory cancellation, we will reimburse you without undue delay and within the applicable legal period; where UK cancellation rules apply, this is normally no later than 14 days after we are informed of your decision to cancel. For other agreed refunds, we will initiate the refund without undue delay and normally within 14 calendar days after confirming the entitlement, or sooner where required by law. An internal review does not extend a statutory deadline.",
+          "For cancellation due to delayed or unavailable delivery, the specific deadline in section 4 applies and runs from cancellation rather than a later confirmation of entitlement.",
           "Refunds are issued in the original transaction currency. A card issuer's conversion may cause the amount in your account currency to differ from the original debit. We do not impose a refund fee. Separate issuer charges are governed by your issuer's terms, without excluding any liability we may have under law.",
           "The time for a refund to appear on your statement depends on the issuer's processing. We can confirm when the refund was initiated and provide available tracing information if it does not arrive.",
         ],
@@ -574,75 +588,110 @@ export const policies: Policy[] = [
     slug: "delivery-activation",
     title: "Digital Delivery & Activation Policy",
     shortTitle: "Delivery & Activation",
-    lastUpdated: LAST_UPDATED,
+    lastUpdated: REVISED_DELIVERY_RETENTION,
     summary:
-      "How your eSIM is delivered electronically, what to do if credentials are missing, and when your Plan's validity begins.",
+      "How your eSIM is delivered, what happens if delivery is delayed, your right to cancel for a full refund, and when your Plan's validity begins.",
     sections: [
       {
-        heading: "Electronic delivery",
+        heading: "Who supplies your eSIM",
         blocks: [
-          "**BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim**, supplies travel eSIMs electronically through **kirosim.com**. Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Delivery and installation enquiries should be sent to **info@kirosim.com**.",
-          "No physical SIM, parcel or postal delivery is included. Following successful payment and order processing, your installation credentials and instructions are made available through the order or account interface and sent to the email address provided for the order.",
+          "**BRIGHTCORE ENTERTAINMENT LTD**, company number **17357935**, trading as **Kirosim**, supplies travel eSIMs through **kirosim.com**. Our registered office is **Dept 6957, 196 High Road, Wood Green, London, United Kingdom, N22 8HH**. Contact **info@kirosim.com** for delivery, installation and cancellation enquiries.",
+          "This Policy forms part of your purchase agreement and should be read with our [Terms & Conditions](https://kirosim.com/legal/terms) and [Refund & Cancellation Policy](https://kirosim.com/legal/refund-cancellation). It does not limit your mandatory consumer rights.",
         ],
       },
       {
-        heading: "Timing and order confirmation",
+        heading: "Electronic delivery and the agreed timeframe",
         blocks: [
-          "We aim to fulfil orders promptly after payment and order processing. Any specific delivery timeframe shown before payment forms part of the order information. Payment verification, provisioning or technical issues may cause a delay; we will address a failure to meet the agreed timeframe under the agreement and applicable law.",
-          "A successful card authorisation alone does not prove that usable credentials have been delivered. Keep the order confirmation, Plan details and applicable policy version for reference.",
+          "Your eSIM is delivered electronically. No physical SIM, parcel or postal delivery is included. Following successful payment and order processing, your installation credentials and instructions are made available through the order or account interface and sent to the email address provided for the order.",
+          "Before you complete payment, we will display the selected Plan's availability and its anticipated delivery date or delivery timeframe. If a timeframe is expressed as a period, we will identify the event from which it runs, such as successful payment. Where a specific date or time applies, we will identify the relevant time zone. Your order confirmation will record the agreed delivery information.",
+          "If a Plan is advertised as available for immediate delivery, that is the delivery commitment for the order unless a different timeframe is clearly explained and expressly agreed before payment. A general reference to processing or verification does not override a specific delivery promise made at checkout.",
+          "Delivery is distinct from installation and use. A card authorisation, payment receipt or order acknowledgement does not by itself demonstrate that usable installation credentials have been delivered.",
         ],
       },
       {
-        heading: "Missing or inaccessible credentials",
+        heading: "Unavailability or delayed delivery known before payment",
         blocks: [
-          "If your email does not arrive, check the order or account page and your spam folder. Confirm that you used the correct email address. Contact us with the order reference if credentials remain missing, inaccessible or invalid.",
-          "If you entered the wrong email, tell us promptly. We may verify ownership before correcting delivery details or resending credentials. If a code may have been exposed to someone else, tell us so that we can assess whether it can be secured or replaced.",
-          "Access to usable credentials in your account may allow installation while an email is delayed. However, an inaccessible or invalid code is not successful delivery simply because an email was sent. If we cannot fulfil the order as agreed, the [Refund & Cancellation Policy](https://kirosim.com/legal/refund-cancellation) applies.",
+          "If the selected eSIM is temporarily unavailable or cannot be delivered within the normally advertised timeframe, we will tell you before you complete payment. We will explain the availability issue, give the revised anticipated delivery date or timeframe and ask you expressly to agree to that delayed delivery before accepting payment for the order.",
+          "You may decline the delayed delivery and leave checkout without making the purchase. A preselected option, silence or acceptance of general terms alone will not be treated as agreement to the specific delay.",
+          "If we cannot provide a meaningful anticipated delivery date or timeframe, the affected Plan will not be available for a paid order until we can do so. We will not take payment on the basis of an undisclosed or indefinite wait.",
+        ],
+      },
+      {
+        heading: "Changes after purchase",
+        blocks: [
+          "If we learn that the originally agreed delivery timeframe cannot be met, we will notify you without undue delay at the email address used for the purchase. Where reasonably possible, we will notify you before that timeframe expires.",
+          "The notice will explain the delay, state the revised anticipated delivery date or timeframe where one can reasonably be provided, and clearly offer you the choice to:",
+          {
+            list: [
+              "expressly agree to wait until the revised delivery date or within the revised timeframe; or",
+              "cancel the affected purchase and receive a full refund for the undelivered eSIM.",
+            ],
+          },
+          "If we cannot give a reliable revised estimate, we will say so and offer cancellation and a full refund rather than represent an uncertain date as confirmed. You do not have to accept a replacement Plan, store credit or an open-ended delay.",
+          "We will not treat silence as acceptance of a revised timeframe. Any request for a response will state a reasonable response deadline. If you do not agree to the revised arrangement and we cannot fulfil the original commitment, we will cancel the affected undelivered order and refund it rather than keep the order pending indefinitely. If an agreed revised timeframe subsequently cannot be met, we will notify you again and renew the cancellation option.",
+          "These delivery-related cancellation rights are separate from the 14-day change-of-mind offer for an uninstalled, unused eSIM. A delay claim is not rejected merely because that 14-day period has expired. Agreeing to wait does not waive other remedies available under applicable law.",
+        ],
+      },
+      {
+        heading: "Cancellation and refunds for delayed or unavailable delivery",
+        blocks: [
+          "To cancel under section 4, reply to the delay notice or email **info@kirosim.com** with your order reference and a clear statement that you wish to cancel. No special form is required. We will confirm cancellation and stop fulfilment of the cancelled item.",
+          "We will refund the full amount paid for the affected undelivered eSIM, including any mandatory charge attributable to that item, without a cancellation or administration fee. For an order containing several items, this normally concerns the affected item, without restricting any wider cancellation right available under the agreement or applicable law.",
+          "We will initiate the refund without undue delay and no later than **14 calendar days after receiving your cancellation notice**, or after we cancel the affected order ourselves, whichever applies. Any shorter legally required deadline takes priority. An internal investigation does not extend this period.",
+          "Refunds are made to the original payment method unless you expressly agree otherwise or a legally permitted alternative is necessary. The time for the credit to appear on your statement depends on the card issuer. We can provide available refund confirmation or tracing information. Further information appears in the [Refund & Cancellation Policy](https://kirosim.com/legal/refund-cancellation).",
+        ],
+      },
+      {
+        heading: "Missing, inaccessible or invalid credentials",
+        blocks: [
+          "If the delivery email does not arrive, check your order or account page and your spam or junk folder. Check the email address used for the order. Contact us promptly if credentials remain missing, inaccessible or invalid, especially if you are close to departure.",
+          "An email marked as sent is not evidence that a valid and usable eSIM has been provided. If usable credentials are accessible through the agreed account or order interface, you may be able to install the eSIM while an email problem is corrected. Otherwise, we will investigate the delivery failure and apply sections 4 and 5 where the agreed timeframe cannot be met.",
+          "If you entered an incorrect email address, tell us promptly. We may verify ownership before correcting the address or resending credentials. If a code may have been exposed to another person, tell us so that we can assess whether it can be secured or replaced. A customer-input error will be considered on its facts and does not automatically remove mandatory rights.",
         ],
       },
       {
         heading: "Before installation",
         blocks: [
-          "Check that the device is eSIM-compatible and network-unlocked, and establish an internet connection for setup. Follow the instructions supplied for your device and Plan. A device family name alone may not establish compatibility for every regional model.",
-          "Check your travel dates and the Plan duration before proceeding. If any installation deadline applies, it must be stated before purchase and in your order information. Contact us if that information is unclear; an undisclosed deadline will not be added retrospectively to your order.",
+          "Confirm that the device supports eSIM, is unlocked for use with other networks and is compatible with the selected Plan. Device variants, software and regional restrictions can affect compatibility. You will need an internet connection to download and install the profile.",
+          "Follow the instructions supplied for your device and Plan. Check your travel dates, Plan duration and any disclosed installation deadline. Any installation deadline must be stated before payment and in the order information; an undisclosed deadline will not be imposed retrospectively.",
         ],
       },
       {
-        heading: "When validity starts",
+        heading: "When the Plan's validity begins",
         blocks: [
-          "**Successful installation of the eSIM starts the purchased Plan's validity period immediately.** It does not wait for arrival in the destination, connection to a foreign network or first data use.",
-          "Receiving an email, downloading instructions or viewing a QR code does not itself install the profile. Completing the profile installation does. Install only when you are ready for the validity period to run.",
-          "After installation, the period runs continuously. Switching off the device, turning off the profile, removing it, travelling outside coverage or leaving data unused does not pause or restart the period. If the expiry information does not reflect the duration purchased, contact us for investigation and correction.",
+          "**Successful installation of the eSIM starts the purchased Plan's validity period immediately.** It does not wait for arrival at your destination, first connection to a foreign network or first data use.",
+          "Receiving an email, viewing a QR code or downloading instructions does not itself install the profile. Completing installation does. Install only when you are ready for the validity period to begin.",
+          "Once started, the period runs continuously. Switching off your device, disabling or deleting the profile, travelling outside coverage or leaving the allowance unused does not pause or restart it. Contact us if the expiry information does not reflect the duration purchased.",
         ],
       },
       {
-        heading: "Connecting after installation",
+        heading: "Connecting and using the service",
         blocks: [
-          "To use connectivity, you may need to enable the installed profile, select it for mobile data, enable data roaming for that profile and apply the settings in the instructions. These steps enable connectivity; they do not postpone the validity start established by installation.",
-          "Keep settings for your ordinary SIM separate. Enabling roaming on your ordinary SIM may incur charges from your existing provider. Any voice, SMS, hotspot or other feature must be included in the Plan to be available.",
-          "Connectivity is limited to the Plan's stated destinations and remains subject to the restricted-country rules in the [Terms & Conditions](https://kirosim.com/legal/terms). Installation does not override those restrictions or guarantee network reception everywhere.",
+          "After installation, you may need to enable the profile, select it for mobile data, enable data roaming for that profile and apply the settings in the supplied instructions. These steps enable connectivity; they do not postpone the validity start established by installation.",
+          "Keep settings for your usual SIM separate. Charges imposed by your existing mobile provider are not included in the Kirosim Plan. Voice, SMS, hotspot and other features are available only where included in the selected Plan.",
+          "Connectivity is limited to the Plan's stated destinations and remains subject to the restricted-country rules in the [Terms & Conditions](https://kirosim.com/legal/terms). Installation does not override those restrictions or guarantee reception at every location.",
         ],
       },
       {
         heading: "QR-code security, deletion and transfers",
         blocks: [
-          "Treat QR codes and manual installation credentials as confidential. Do not post them publicly or provide them to an unknown person. A copy of a QR image does not create another licensed eSIM or guarantee another installation.",
-          "Do not assume that a profile can be installed on multiple devices, transferred or reinstalled after deletion. These functions depend on the profile and device. Contact us before deleting an eSIM, resetting a device or attempting a transfer.",
-          "If replacement is possible and chargeable, we will explain the cost before you agree. No replacement fee will displace a remedy we must provide without charge under law.",
+          "Keep QR codes and manual installation credentials confidential. Do not publish them or provide them to an unknown person. Copying a QR image does not create another eSIM or guarantee an additional installation.",
+          "Do not assume a profile can be installed on multiple devices, transferred or reinstalled after deletion. Contact us before deleting an eSIM, resetting a device or attempting a transfer. Do not delete a profile as a troubleshooting step unless instructed.",
+          "If a replacement is possible and chargeable, we will explain the cost before you agree. No replacement fee will displace a remedy that must be provided without charge under applicable law.",
         ],
       },
       {
         heading: "Top-ups",
         blocks: [
-          "Top-ups are available only for eligible eSIMs and require a separate purchase. Before payment, the Top-up description must explain when its allowance becomes available, when its own validity starts and whether it affects an existing allowance or expiry date.",
-          "A Top-up does not automatically repair a deleted, incompatible or unusable profile. Verify that the correct eSIM is selected before paying. No Top-up is purchased or charged automatically.",
+          "Top-ups are available only for eligible eSIMs and require a separate purchase. Before payment, we will explain availability, delivery timing, when the allowance becomes usable, when its validity starts and whether it affects an existing allowance or expiry date. The delay notification and cancellation principles in this Policy also apply to an undelivered Top-up.",
+          "A Top-up does not automatically repair a deleted, incompatible or unusable profile. Confirm that you have selected the intended eSIM before paying. No Top-up is purchased or charged automatically.",
         ],
       },
       {
-        heading: "Help and remedies",
+        heading: "Help and other remedies",
         blocks: [
-          "Email **info@kirosim.com** with the order reference, device model, destination and relevant error details. Do not send passwords, full card information or unnecessary personal information in screenshots.",
-          "Delivery, installation and service availability are distinct stages. Receiving a QR code does not by itself remove cancellation or fault-related rights. See the [Refund & Cancellation Policy](https://kirosim.com/legal/refund-cancellation) for the available remedies.",
+          "Email **info@kirosim.com** with your order reference, device model, destination and relevant error details. Conceal unrelated personal information in screenshots and do not send passwords or full card information.",
+          "Delivery, installation and service availability are separate stages. Receipt of a QR code does not by itself extinguish cancellation or fault-related rights. If a delivered eSIM does not work as agreed, the [Refund & Cancellation Policy](https://kirosim.com/legal/refund-cancellation) applies independently of the delivery-delay provisions above.",
         ],
       },
     ],
